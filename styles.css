@@ -453,6 +453,7 @@ textarea:focus {
 .email-link {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 12px;
     color: var(--accent-primary);
     text-decoration: none;
@@ -462,6 +463,8 @@ textarea:focus {
     padding: 1rem 2rem;
     background: #f8f9fa;
     border-radius: 12px;
+    max-width: 100%;
+    word-break: break-word;
 }
 
 [data-theme="dark"] .email-link {
@@ -625,6 +628,12 @@ footer p {
         bottom: 1rem;
         right: 1rem;
     }
+
+    .email-link {
+        font-size: 1.2rem;
+        padding: 0.8rem 1.5rem;
+        flex-wrap: wrap;
+    }
 }
 
 @media (max-width: 480px) {
@@ -660,6 +669,16 @@ footer p {
         width: 40px;
         height: 40px;
         font-size: 1.2rem;
+    }
+
+    .email-link {
+        font-size: 1rem;
+        padding: 0.8rem 1rem;
+        gap: 8px;
+    }
+
+    .email-icon {
+        font-size: 1.5rem;
     }
 }
 
