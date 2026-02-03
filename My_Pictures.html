@@ -96,6 +96,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 1.5rem;
+            justify-items: center;
         }
 
         .gallery-link {
@@ -105,6 +106,13 @@
             text-align: center;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px var(--card-shadow);
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-links {
+                grid-template-columns: 1fr;
+            }
         }
 
         .gallery-link:hover {
