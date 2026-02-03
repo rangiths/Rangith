@@ -5,20 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rahul's Home Page</title>
     <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- Open Graph tags for social sharing -->
+    <meta property="og:title" content="Rangith's Home Page">
+    <meta property="og:description" content="Welcome to our family website - sharing memories and moments">
+    <meta property="og:type" content="website">
+
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header role="banner">
         <div class="container">
             <h1>
-                <span class="site-icon">🏠</span>
+                <span class="site-icon" aria-hidden="true">🏠</span>
                 Rangith's Home Page
             </h1>
             <p class="tagline">Welcome to our family website</p>
+
+            <!-- Dark mode toggle -->
+            <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
+                <span class="sun-icon">☀️</span>
+                <span class="moon-icon">🌙</span>
+            </button>
         </div>
     </header>
 
-    <main class="container">
+    <main id="main-content" class="container" role="main">
         <section class="hero">
             <h2>Welcome!</h2>
             <p class="hero-subtitle">Sharing our family memories and moments</p>
@@ -26,7 +41,7 @@
 
         <section class="announcement">
             <div class="announcement-box">
-                <span class="announcement-icon">🏒</span>
+                <span class="announcement-icon" aria-hidden="true">🏒</span>
                 <a href="january_2010_newsletter.pdf" class="announcement-link">
                     Rahul had his first goal in hockey on Jan 20th, 2010
                 </a>
@@ -34,39 +49,44 @@
         </section>
 
         <section class="content-grid">
-            <div class="content-card">
-                <div class="card-icon">🌳</div>
+            <article class="content-card">
+                <div class="card-icon" aria-hidden="true">🌳</div>
                 <h3>Family Tree</h3>
                 <p>
                     Explore our family history and connections.
-                    <a href="http://rangith.tribalpages.com/tribe/browse?userid=rangith&pid=-1&bview=9&view=72&rand=953225734">
+                    <a href="http://rangith.tribalpages.com/tribe/browse?userid=rangith&pid=-1&bview=9&view=72&rand=953225734"
+                       target="_blank"
+                       rel="noopener noreferrer">
                         View family tree
                     </a>
                 </p>
                 <p class="password-note">Password: <strong class="password">jaffna123</strong></p>
-            </div>
+            </article>
 
-            <div class="content-card highlight">
-                <div class="card-icon">📸</div>
+            <article class="content-card highlight">
+                <div class="card-icon" aria-hidden="true">📸</div>
                 <h3>Family Pictures</h3>
                 <p>
                     Browse through our collection of family photos and memories.
                 </p>
                 <a href="My_Pictures.html" class="card-button">View Photo Albums</a>
-                <span class="new-badge">Updated June 2, 2021</span>
-            </div>
+                <span class="new-badge" aria-label="Updated June 2, 2021">Updated June 2, 2021</span>
+            </article>
 
-            <div class="content-card">
-                <div class="card-icon">🎥</div>
+            <article class="content-card">
+                <div class="card-icon" aria-hidden="true">🎥</div>
                 <h3>YouTube Videos</h3>
                 <p>
                     Watch our family videos and special moments captured on video.
                 </p>
-                <a href="http://www.youtube.com/results?search_query=rogerogeroger&aq=f" class="card-button">
+                <a href="http://www.youtube.com/results?search_query=rogerogeroger&aq=f"
+                   class="card-button"
+                   target="_blank"
+                   rel="noopener noreferrer">
                     Watch Videos
                 </a>
-                <span class="new-badge">Updated June 2, 2012</span>
-            </div>
+                <span class="new-badge" aria-label="Updated June 2, 2012">Updated June 2, 2012</span>
+            </article>
         </section>
 
         <section class="thanks-section">
@@ -76,17 +96,24 @@
         <section class="contact">
             <h3>Get in Touch</h3>
             <a href="mailto:rangiths@hotmail.com" class="email-link">
-                <span class="email-icon">✉️</span>
+                <span class="email-icon" aria-hidden="true">✉️</span>
                 rangiths@hotmail.com
             </a>
             <p class="contact-subtitle">Feel free to send us your comments and feedback</p>
         </section>
     </main>
 
-    <footer>
+    <!-- Back to top button -->
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+        ↑
+    </button>
+
+    <footer role="contentinfo">
         <div class="container">
             <p>&copy; 2024 Rangith's Home Page | A Family Website</p>
         </div>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

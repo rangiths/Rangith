@@ -5,44 +5,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Pictures - Rahul's Home Page</title>
     <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- Open Graph tags for social sharing -->
+    <meta property="og:title" content="Our Family Pictures - Rangith's Home Page">
+    <meta property="og:description" content="Browse through years of family memories and adventures">
+    <meta property="og:type" content="website">
+
     <link rel="stylesheet" href="styles.css">
     <style>
         .page-header {
-            background: white;
+            background: var(--bg-white);
             border-radius: 16px;
             padding: 3rem 2rem;
             text-align: center;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 40px var(--card-shadow);
             margin-bottom: 3rem;
             margin-top: 3rem;
+            transition: all 0.3s ease;
         }
 
         .page-header h2 {
             font-size: 3rem;
-            color: #2c3e50;
+            color: var(--text-primary);
             margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
         }
 
         .page-header p {
             font-size: 1.2rem;
-            color: #7f8c8d;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+
+        /* Breadcrumb navigation */
+        .breadcrumb {
+            background: var(--bg-white);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px var(--card-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .breadcrumb nav {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .breadcrumb a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-secondary);
+            text-decoration: underline;
+        }
+
+        .breadcrumb-separator {
+            color: var(--text-secondary);
+        }
+
+        .breadcrumb-current {
+            color: var(--text-secondary);
         }
 
         .gallery-section {
-            background: white;
+            background: var(--bg-white);
             border-radius: 16px;
             padding: 3rem;
             margin-bottom: 2.5rem;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 10px 40px var(--card-shadow);
+            transition: all 0.3s ease;
         }
 
         .gallery-section h3 {
-            color: #667eea;
-            border-bottom: 4px solid #667eea;
+            color: var(--accent-primary);
+            border-bottom: 4px solid var(--accent-primary);
             padding-bottom: 1rem;
             margin-bottom: 2rem;
             font-size: 2rem;
             font-weight: 600;
+            transition: color 0.3s ease, border-color 0.3s ease;
         }
 
         .gallery-links {
@@ -52,17 +99,17 @@
         }
 
         .gallery-link {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
             padding: 2rem;
             border-radius: 12px;
             text-align: center;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px var(--card-shadow);
         }
 
         .gallery-link:hover {
             transform: translateY(-8px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 25px var(--card-shadow-hover);
         }
 
         .gallery-link a {
@@ -71,6 +118,11 @@
             font-weight: 600;
             display: block;
             font-size: 1.15rem;
+        }
+
+        .gallery-link:focus-within {
+            outline: 3px solid #ffd700;
+            outline-offset: 2px;
         }
 
         .gallery-link a:hover {
@@ -84,7 +136,7 @@
 
         .back-link {
             display: inline-block;
-            background: #667eea;
+            background: var(--accent-primary);
             color: white;
             padding: 15px 40px;
             border-radius: 12px;
@@ -92,185 +144,259 @@
             font-weight: 700;
             font-size: 1.1rem;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 15px var(--card-shadow-hover);
         }
 
         .back-link:hover {
-            background: #764ba2;
+            background: var(--accent-secondary);
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 6px 20px var(--card-shadow-hover);
+        }
+
+        .back-link:focus {
+            outline: 3px solid var(--focus-color);
+            outline-offset: 3px;
         }
 
         .more-coming {
-            background: white;
+            background: var(--bg-white);
             border-radius: 16px;
             padding: 2.5rem;
             text-align: center;
             font-size: 1.5rem;
-            color: #7f8c8d;
+            color: var(--text-secondary);
             font-style: italic;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 10px 40px var(--card-shadow);
             margin-bottom: 3rem;
+            transition: all 0.3s ease;
         }
     </style>
 </head>
 <body>
-    <header>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header role="banner">
         <div class="container">
             <h1>
-                <span class="site-icon">📸</span>
+                <span class="site-icon" aria-hidden="true">📸</span>
                 Our Family Pictures
             </h1>
             <p class="tagline">A collection of our cherished memories</p>
+
+            <!-- Dark mode toggle -->
+            <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
+                <span class="sun-icon">☀️</span>
+                <span class="moon-icon">🌙</span>
+            </button>
         </div>
     </header>
 
-    <main class="container">
+    <main id="main-content" class="container" role="main">
+        <!-- Breadcrumb navigation -->
+        <div class="breadcrumb">
+            <nav aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="breadcrumb-separator" aria-hidden="true">›</span>
+                <span class="breadcrumb-current" aria-current="page">Photo Albums</span>
+            </nav>
+        </div>
+
         <div class="page-header">
             <h2>Photo Albums</h2>
             <p>Browse through years of family memories and adventures</p>
         </div>
 
-        <div class="gallery-section">
+        <article class="gallery-section">
             <h3>2022 Album</h3>
             <div class="gallery-links">
                 <div class="gallery-link">
-                    <a href="https://photos.app.goo.gl/mZLJWK4QNeQQAP578">🎂 Rahul's Birthday 2022</a>
+                    <a href="https://photos.app.goo.gl/mZLJWK4QNeQQAP578" target="_blank" rel="noopener noreferrer">
+                        <span aria-hidden="true">🎂</span> Rahul's Birthday 2022
+                    </a>
                 </div>
             </div>
-        </div>
+        </article>
 
-        <div class="gallery-section">
+        <article class="gallery-section">
             <h3>2021 Album</h3>
             <div class="gallery-links">
                 <div class="gallery-link">
-                    <a href="https://photos.app.goo.gl/1J9W2FXY9rpcCSQF6">🎂 Rahul's Birthday 2021</a>
+                    <a href="https://photos.app.goo.gl/1J9W2FXY9rpcCSQF6" target="_blank" rel="noopener noreferrer">
+                        <span aria-hidden="true">🎂</span> Rahul's Birthday 2021
+                    </a>
                 </div>
                 <div class="gallery-link">
-                    <a href="https://photos.app.goo.gl/gnJuTZe6X6tireGb6">🏖️ Brockville 2021</a>
+                    <a href="https://photos.app.goo.gl/gnJuTZe6X6tireGb6" target="_blank" rel="noopener noreferrer">
+                        <span aria-hidden="true">🏖️</span> Brockville 2021
+                    </a>
                 </div>
                 <div class="gallery-link">
-                    <a href="https://photos.app.goo.gl/MN3hFpUTfLpjUouP6">🌊 Niagara Falls 2021</a>
+                    <a href="https://photos.app.goo.gl/MN3hFpUTfLpjUouP6" target="_blank" rel="noopener noreferrer">
+                        <span aria-hidden="true">🌊</span> Niagara Falls 2021
+                    </a>
                 </div>
             </div>
-        </div>
+        </article>
 
-        <div class="gallery-section">
+        <article class="gallery-section">
             <h3>2020 Album</h3>
             <div class="gallery-links">
                 <div class="gallery-link">
-                    <a href="https://photos.app.goo.gl/5TCTLKEqp9fnL42H9">🎉 Rahul's 21st Birthday</a>
+                    <a href="https://photos.app.goo.gl/5TCTLKEqp9fnL42H9" target="_blank" rel="noopener noreferrer">
+                        <span aria-hidden="true">🎉</span> Rahul's 21st Birthday
+                    </a>
                 </div>
             </div>
-        </div>
+        </article>
 
-        <div class="gallery-section">
+        <article class="gallery-section">
             <h3>2019 Album</h3>
             <div class="gallery-links">
                 <div class="gallery-link">
-                    <a href="https://photos.app.goo.gl/2HjyzgRDm3te2FWB9">🌴 Nicaragua 2019</a>
+                    <a href="https://photos.app.goo.gl/2HjyzgRDm3te2FWB9" target="_blank" rel="noopener noreferrer">
+                        <span aria-hidden="true">🌴</span> Nicaragua 2019
+                    </a>
                 </div>
                 <div class="gallery-link">
-                    <a href="https://photos.app.goo.gl/Uk6k1f3BXgCncqWx6">🏝️ Costa Rica 2019</a>
+                    <a href="https://photos.app.goo.gl/Uk6k1f3BXgCncqWx6" target="_blank" rel="noopener noreferrer">
+                        <span aria-hidden="true">🏝️</span> Costa Rica 2019
+                    </a>
                 </div>
                 <div class="gallery-link">
-                    <a href="https://photos.app.goo.gl/SD9vY66tH2V1qyfF8">💑 Our 25th Anniversary</a>
+                    <a href="https://photos.app.goo.gl/SD9vY66tH2V1qyfF8" target="_blank" rel="noopener noreferrer">
+                        <span aria-hidden="true">💑</span> Our 25th Anniversary
+                    </a>
                 </div>
                 <div class="gallery-link">
-                    <a href="https://photos.app.goo.gl/r1pv8tHKWbK1A3F79">🎂 Rahul's 20th Birthday</a>
+                    <a href="https://photos.app.goo.gl/r1pv8tHKWbK1A3F79" target="_blank" rel="noopener noreferrer">
+                        <span aria-hidden="true">🎂</span> Rahul's 20th Birthday
+                    </a>
                 </div>
             </div>
-        </div>
+        </article>
 
-        <div class="gallery-section">
+        <article class="gallery-section">
             <h3>2018 Album</h3>
             <div class="gallery-links">
                 <div class="gallery-link">
-                    <a href="https://photos.app.goo.gl/b6MhEN9QuicE8SDo7">🌮 Mexico 2018</a>
+                    <a href="https://photos.app.goo.gl/b6MhEN9QuicE8SDo7" target="_blank" rel="noopener noreferrer">
+                        <span aria-hidden="true">🌮</span> Mexico 2018
+                    </a>
                 </div>
                 <div class="gallery-link">
-                    <a href="https://photos.app.goo.gl/jpmaMv5UZJuJflVV2">👨‍👩‍👦 Family Get Together</a>
+                    <a href="https://photos.app.goo.gl/jpmaMv5UZJuJflVV2" target="_blank" rel="noopener noreferrer">
+                        <span aria-hidden="true">👨‍👩‍👦</span> Family Get Together
+                    </a>
                 </div>
                 <div class="gallery-link">
-                    <a href="https://photos.app.goo.gl/3tmmKfAqjmD4isV28">🎂 Rahul's 19th Birthday</a>
+                    <a href="https://photos.app.goo.gl/3tmmKfAqjmD4isV28" target="_blank" rel="noopener noreferrer">
+                        <span aria-hidden="true">🎂</span> Rahul's 19th Birthday
+                    </a>
                 </div>
             </div>
-        </div>
+        </article>
 
-        <div class="gallery-section">
+        <article class="gallery-section">
             <h3>2017 Album</h3>
             <div class="gallery-links">
                 <div class="gallery-link">
-                    <a href="https://photos.app.goo.gl/ZXidWrdufkTSNDtMA">🇱🇰 Sri Lanka Trip Part 1</a>
+                    <a href="https://photos.app.goo.gl/ZXidWrdufkTSNDtMA" target="_blank" rel="noopener noreferrer">
+                        <span aria-hidden="true">🇱🇰</span> Sri Lanka Trip Part 1
+                    </a>
                 </div>
                 <div class="gallery-link">
-                    <a href="https://photos.app.goo.gl/bKwMZVGqgEdH54988">🇱🇰 Sri Lanka Trip Part 2</a>
+                    <a href="https://photos.app.goo.gl/bKwMZVGqgEdH54988" target="_blank" rel="noopener noreferrer">
+                        <span aria-hidden="true">🇱🇰</span> Sri Lanka Trip Part 2
+                    </a>
                 </div>
                 <div class="gallery-link">
-                    <a href="https://photos.app.goo.gl/nx8NzJW3uiB4QtTB6">🇱🇰 Sri Lanka Trip Part 3</a>
+                    <a href="https://photos.app.goo.gl/nx8NzJW3uiB4QtTB6" target="_blank" rel="noopener noreferrer">
+                        <span aria-hidden="true">🇱🇰</span> Sri Lanka Trip Part 3
+                    </a>
                 </div>
                 <div class="gallery-link">
-                    <a href="https://goo.gl/photos/2WtcpHvQoEHjBdPt9">🎂 Rahul's 18th Birthday</a>
+                    <a href="https://goo.gl/photos/2WtcpHvQoEHjBdPt9" target="_blank" rel="noopener noreferrer">
+                        <span aria-hidden="true">🎂</span> Rahul's 18th Birthday
+                    </a>
                 </div>
             </div>
-        </div>
+        </article>
 
-        <div class="gallery-section">
+        <article class="gallery-section">
             <h3>2016 Album</h3>
             <div class="gallery-links">
                 <div class="gallery-link">
-                    <a href="https://goo.gl/photos/w2jKNcGCozvYQEBTA">🎂 Rahul's 17th Birthday</a>
+                    <a href="https://goo.gl/photos/w2jKNcGCozvYQEBTA" target="_blank" rel="noopener noreferrer">
+                        <span aria-hidden="true">🎂</span> Rahul's 17th Birthday
+                    </a>
                 </div>
                 <div class="gallery-link">
-                    <a href="https://goo.gl/photos/rDdmGSG9V96JaM469">🎂 Rathika's Birthday</a>
+                    <a href="https://goo.gl/photos/rDdmGSG9V96JaM469" target="_blank" rel="noopener noreferrer">
+                        <span aria-hidden="true">🎂</span> Rathika's Birthday
+                    </a>
                 </div>
                 <div class="gallery-link">
-                    <a href="https://photos.app.goo.gl/4Fraxx7R7vYHlOgi1">🌮 Mexico</a>
+                    <a href="https://photos.app.goo.gl/4Fraxx7R7vYHlOgi1" target="_blank" rel="noopener noreferrer">
+                        <span aria-hidden="true">🌮</span> Mexico
+                    </a>
                 </div>
             </div>
-        </div>
+        </article>
 
-        <div class="gallery-section">
+        <article class="gallery-section">
             <h3>2015 Album</h3>
             <div class="gallery-links">
                 <div class="gallery-link">
-                    <a href="https://goo.gl/photos/BGTKd9BKZiBJY6wC9">🎂 Rahul's 16th Birthday</a>
+                    <a href="https://goo.gl/photos/BGTKd9BKZiBJY6wC9" target="_blank" rel="noopener noreferrer">
+                        <span aria-hidden="true">🎂</span> Rahul's 16th Birthday
+                    </a>
                 </div>
                 <div class="gallery-link">
-                    <a href="https://goo.gl/photos/gSUknTBHwHhi4CYw5">🏖️ Punta Cana</a>
+                    <a href="https://goo.gl/photos/gSUknTBHwHhi4CYw5" target="_blank" rel="noopener noreferrer">
+                        <span aria-hidden="true">🏖️</span> Punta Cana
+                    </a>
                 </div>
                 <div class="gallery-link">
-                    <a href="https://goo.gl/photos/KvV3vEd8QCLgPD4N7">🇬🇧 London UK</a>
+                    <a href="https://goo.gl/photos/KvV3vEd8QCLgPD4N7" target="_blank" rel="noopener noreferrer">
+                        <span aria-hidden="true">🇬🇧</span> London UK
+                    </a>
                 </div>
             </div>
-        </div>
+        </article>
 
-        <div class="gallery-section">
+        <article class="gallery-section">
             <h3>2014 Album</h3>
             <div class="gallery-links">
                 <div class="gallery-link">
-                    <a href="https://goo.gl/photos/YKinNbtDzv9wp6as7">🎂 Rahul's 15th Birthday</a>
+                    <a href="https://goo.gl/photos/YKinNbtDzv9wp6as7" target="_blank" rel="noopener noreferrer">
+                        <span aria-hidden="true">🎂</span> Rahul's 15th Birthday
+                    </a>
                 </div>
             </div>
-        </div>
+        </article>
 
-        <div class="gallery-section">
+        <article class="gallery-section">
             <h3>Special Videos</h3>
             <div class="gallery-links">
                 <div class="gallery-link">
-                    <a href="https://goo.gl/photos/mQGXacs8u7QmJzzc6">🎬 Rahul's Abacus Video</a>
+                    <a href="https://goo.gl/photos/mQGXacs8u7QmJzzc6" target="_blank" rel="noopener noreferrer">
+                        <span aria-hidden="true">🎬</span> Rahul's Abacus Video
+                    </a>
                 </div>
             </div>
-        </div>
+        </article>
 
-        <div class="gallery-section">
+        <article class="gallery-section">
             <h3>Archive</h3>
             <div class="gallery-links">
                 <div class="gallery-link">
-                    <a href="https://photobucket.com/u/rangith">📦 Old Pictures Collection</a>
+                    <a href="https://photobucket.com/u/rangith" target="_blank" rel="noopener noreferrer">
+                        <span aria-hidden="true">📦</span> Old Pictures Collection
+                    </a>
                 </div>
             </div>
-        </div>
+        </article>
 
         <div class="more-coming">
             <strong>More memories to come...</strong>
@@ -282,18 +408,25 @@
 
         <section class="contact">
             <h3>Get in Touch</h3>
-            <a href="mailto:rahulrangith@hotmail.com" class="email-link">
-                <span class="email-icon">✉️</span>
-                rahulrangith@hotmail.com
+            <a href="mailto:rangiths@hotmail.com" class="email-link">
+                <span class="email-icon" aria-hidden="true">✉️</span>
+                rangiths@hotmail.com
             </a>
             <p class="contact-subtitle">Share your thoughts and memories with us</p>
         </section>
     </main>
 
-    <footer>
+    <!-- Back to top button -->
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+        ↑
+    </button>
+
+    <footer role="contentinfo">
         <div class="container">
             <p>&copy; 2024 Rangith's Home Page | A Family Website</p>
         </div>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
