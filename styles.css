@@ -415,6 +415,74 @@ textarea:focus {
     background: rgba(255, 255, 255, 0.3);
 }
 
+/* Apps Section */
+.apps-section {
+    background: var(--bg-white);
+    border-radius: 16px;
+    padding: 3rem 2.5rem;
+    box-shadow: 0 10px 40px var(--card-shadow);
+    transition: all 0.3s ease;
+}
+
+.apps-heading {
+    font-size: 2rem;
+    color: var(--text-primary);
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+    transition: color 0.3s ease;
+}
+
+.apps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.app-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem 1.5rem;
+    background: #f8f9fa;
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+[data-theme="dark"] .app-card {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.app-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent-primary);
+    box-shadow: 0 8px 30px var(--card-shadow-hover);
+}
+
+.app-card .app-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.app-card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+}
+
+.app-card p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    transition: color 0.3s ease;
+}
+
 /* Thanks Section */
 .thanks-section {
     background: var(--bg-white);
