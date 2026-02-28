@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Availability Calendar</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Name Modal -->
+  <div id="modal-overlay" class="modal-overlay">
+    <div class="modal">
+      <h2>Availability Calendar</h2>
+      <p id="modal-subtitle">Enter your name to get started.</p>
+      <div id="existing-users"></div>
+      <div class="modal-input-row">
+        <input type="text" id="name-input" placeholder="Your name" maxlength="30" autocomplete="off">
+        <button id="name-submit" onclick="handleNameSubmit()">Go</button>
+      </div>
+      <p id="name-error" class="name-error"></p>
+    </div>
+  </div>
+
+  <!-- Main App -->
+  <div id="app" class="app hidden">
+
+    <header class="app-header">
+      <span id="header-greeting" class="greeting"></span>
+      <div class="user-switcher">
+        <button class="change-user-btn" onclick="toggleUserDropdown()">Change user</button>
+        <div id="user-dropdown" class="user-dropdown hidden">
+          <div class="user-dropdown-header">
+            <span>Switch to</span>
+            <button class="dropdown-close" onclick="hideUserDropdown()" aria-label="Close">&times;</button>
+          </div>
+          <ul id="user-dropdown-list" class="user-dropdown-list"></ul>
+        </div>
+      </div>
+    </header>
+
+    <!-- Legend -->
+    <div class="legend">
+      <span class="legend-item"><span class="dot green"></span> Available</span>
+      <span class="legend-item"><span class="dot orange"></span> Not preferred</span>
+      <span class="legend-item"><span class="dot red"></span> Busy</span>
+    </div>
+    <p class="slot-hint">Tap a day to mark the whole day. Tap &#9728; or &#9789; to mark afternoon/night separately.</p>
+
+    <!-- Warning banner (shown on corrupted hash) -->
+    <div id="warning-banner" class="warning-banner hidden">
+      Could not load shared link data — starting fresh.
+    </div>
+
+    <!-- Calendar navigation -->
+    <div class="month-nav">
+      <button class="nav-btn" onclick="changeMonth(-1)" aria-label="Previous month">&#8592;</button>
+      <span id="month-label" class="month-label"></span>
+      <button class="nav-btn" onclick="changeMonth(1)" aria-label="Next month">&#8594;</button>
+    </div>
+
+    <!-- Calendar grid -->
+    <div class="calendar-wrap">
+      <div class="day-headers">
+        <div>Su</div><div>Mo</div><div>Tu</div><div>We</div>
+        <div>Th</div><div>Fr</div><div>Sa</div>
+      </div>
+      <div id="calendar-grid" class="calendar-grid"></div>
+    </div>
+
+    <!-- Share section -->
+    <div class="share-section">
+      <p class="share-label">Share this link with friends:</p>
+      <div class="share-row">
+        <input type="text" id="share-url" class="share-url" readonly>
+        <button id="copy-btn" onclick="copyLink()">Copy</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Tooltip -->
+  <div id="day-tooltip" class="day-tooltip"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
