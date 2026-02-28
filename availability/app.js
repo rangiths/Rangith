@@ -194,27 +194,37 @@
     // Hash-only URLs have no meaningful length limit (hash is never sent to the server)
   }
 
-  window.copyLink = function () {
+  window.copyLink = async function () {
     var input = document.getElementById('share-url');
     var btn = document.getElementById('copy-btn');
     var url = input.value;
 
-    function confirm() {
-      btn.textContent = 'Copied!';
-      btn.classList.add('copied');
-      setTimeout(function () {
-        btn.textContent = 'Copy';
-        btn.classList.remove('copied');
-      }, 1800);
-    }
+    btn.textContent = 'Shortening…';
+    btn.disabled = true;
 
-    if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(url).then(confirm);
-    } else {
+    var toCopy = url;
+    try {
+      var resp = await fetch('https://da.gd/shorten?url=' + encodeURIComponent(url));
+      var short = await resp.text();
+      if (short && short.startsWith('https://da.gd/')) toCopy = short.trim();
+    } catch (e) { /* fall back to full URL */ }
+
+    try {
+      await navigator.clipboard.writeText(toCopy);
+    } catch (e) {
+      input.value = toCopy;
       input.select();
       document.execCommand('copy');
-      confirm();
+      input.value = url; // restore
     }
+
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    btn.disabled = false;
+    setTimeout(function () {
+      btn.textContent = 'Copy';
+      btn.classList.remove('copied');
+    }, 1800);
   };
 
   // ── Tooltip ────────────────────────────────────────────────────────────────
