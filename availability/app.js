@@ -236,6 +236,13 @@
       if (short && short.startsWith('https://da.gd/')) toCopy = short.trim();
     } catch (e) { /* fall back to full URL */ }
 
+    var names = appState.users.map(function (u) { return u.name; }).join(', ');
+    var message = '';
+    if (appState.name) message += appState.name + '\n';
+    message += 'Please fill out your availability: ' + toCopy;
+    if (names) message += '\nAlready filled out: ' + names;
+    toCopy = message;
+
     try {
       await navigator.clipboard.writeText(toCopy);
     } catch (e) {
