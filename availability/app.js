@@ -7,6 +7,7 @@
 
   var appState = { v: 2, name: '', users: [] };
   var currentUserIndex = -1;
+  var browseMode = false;
 
   var today = new Date();
   var viewYear = today.getFullYear();
@@ -63,6 +64,32 @@
       userDays[dateStr][slot] = next;
     }
   }
+
+  // ── Browse Mode ────────────────────────────────────────────────────────────
+
+  function exitBrowseMode() {
+    if (!browseMode) return;
+    browseMode = false;
+    document.getElementById('browse-banner').classList.add('hidden');
+    document.getElementById('slot-hint').classList.remove('hidden');
+    document.querySelector('.edit-cal-btn').classList.remove('hidden');
+    document.getElementById('calendar-grid').classList.remove('browse-mode');
+  }
+
+  window.enterBrowseMode = function () {
+    browseMode = true;
+    currentUserIndex = -1;
+    hideModal();
+    document.getElementById('header-greeting').textContent = 'Browsing';
+    document.getElementById('cal-name').textContent = appState.name;
+    document.getElementById('app').classList.remove('hidden');
+    document.getElementById('browse-banner').classList.remove('hidden');
+    document.getElementById('slot-hint').classList.add('hidden');
+    document.querySelector('.edit-cal-btn').classList.add('hidden');
+    document.getElementById('calendar-grid').classList.add('browse-mode');
+    renderCalendar();
+    updateShareLink();
+  };
 
   // ── Weekday Afternoon Pre-fill ─────────────────────────────────────────────
 
@@ -223,7 +250,7 @@
   var tooltipTarget = null;
 
   function showTooltip(dateStr, anchorEl) {
-    if (appState.users.length < 2) return;
+    if (appState.users.length < (browseMode ? 1 : 2)) return;
     var lines = [];
     appState.users.forEach(function (u) {
       var a = getSlotStatus(u, dateStr, 'a');
@@ -270,6 +297,7 @@
   var gridEl = document.getElementById('calendar-grid');
 
   gridEl.addEventListener('click', function (e) {
+    if (browseMode) return;
     // Check if a slot icon was clicked
     var slotEl = e.target.closest('[data-slot]');
     var dateStr, dayCell;
@@ -345,16 +373,18 @@
   function populateUserDropdown() {
     var list = document.getElementById('user-dropdown-list');
     list.innerHTML = appState.users.map(function (u, i) {
-      var isActive = i === currentUserIndex;
+      var isActive = !browseMode && i === currentUserIndex;
       return '<li class="' + (isActive ? 'active' : '') + '" onclick="switchToUser(' + i + ')">' +
         escapeHtml(u.name) +
         (isActive ? '<span class="checkmark">&#10003;</span>' : '') +
       '</li>';
-    }).join('');
+    }).join('') +
+    '<li class="new-user-item" onclick="showModal()">+ New user</li>';
   }
 
   window.switchToUser = function (idx) {
-    if (idx === currentUserIndex) { hideUserDropdown(); return; }
+    if (idx === currentUserIndex && !browseMode) { hideUserDropdown(); return; }
+    exitBrowseMode();
     currentUserIndex = idx;
     var name = appState.users[idx].name;
     sessionStorage.setItem('calUser', JSON.stringify({ name: name, userIndex: idx }));
@@ -448,6 +478,10 @@
         existingEl.innerHTML = '<div class="existing-users-list"><p>Already marked availability:</p><ul>' + names + '</ul></div>';
       }
     }
+
+    var hasBrowsable = users.length > 0;
+    document.getElementById('browse-btn').classList.toggle('hidden', !hasBrowsable);
+    document.getElementById('modal-browse-divider').classList.toggle('hidden', !hasBrowsable);
   }
 
   window.handleNameSubmit = function () {
@@ -484,6 +518,7 @@
       currentUserIndex = appState.users.length - 1;
     }
 
+    exitBrowseMode();
     sessionStorage.setItem('calUser', JSON.stringify({ name: name, userIndex: currentUserIndex }));
     document.getElementById('header-greeting').textContent = 'Hi, ' + name;
     document.getElementById('cal-name').textContent = appState.name;

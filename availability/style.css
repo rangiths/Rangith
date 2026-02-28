@@ -115,6 +115,42 @@ body {
   min-height: 18px;
 }
 
+.modal-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 14px 0 10px;
+  color: #bbb;
+  font-size: 0.8rem;
+}
+
+.modal-divider::before,
+.modal-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e0e0e0;
+}
+
+.browse-btn {
+  width: 100%;
+  background: #e8f4e8;
+  color: #2e7d32;
+  border: 1.5px solid #a5d6a7;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.browse-btn:hover {
+  background: #c8e6c9;
+  border-color: #66bb6a;
+  color: #1b5e20;
+}
+
 /* ── App Shell ── */
 
 .app {
@@ -652,4 +688,35 @@ body {
     right: 24px;
     font-size: 0.78rem;
   }
+}
+
+/* ── Browse Mode ── */
+
+.browse-banner {
+  background: #fff8e1;
+  color: #7a5c00;
+  border: 1px solid #ffe082;
+  border-radius: 8px;
+  padding: 8px 14px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+.browse-banner a {
+  color: #7a5c00;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+#calendar-grid.browse-mode .day-cell {
+  cursor: default;
+}
+
+.new-user-item {
+  border-top: 1px solid #e0e0e0;
+  margin-top: 4px;
+  padding-top: 8px !important;
+  color: #4a90e2 !important;
+  font-weight: 600;
 }
