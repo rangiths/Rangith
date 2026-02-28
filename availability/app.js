@@ -246,10 +246,14 @@
     try {
       await navigator.clipboard.writeText(toCopy);
     } catch (e) {
-      input.value = toCopy;
-      input.select();
+      var ta = document.createElement('textarea');
+      ta.value = toCopy;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
       document.execCommand('copy');
-      input.value = url; // restore
+      document.body.removeChild(ta);
     }
 
     btn.textContent = 'Copied!';
