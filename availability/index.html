@@ -12,6 +12,11 @@
   <div id="modal-overlay" class="modal-overlay">
     <div class="modal">
       <h2>Availability Calendar</h2>
+      <div id="joining-label" class="joining-label hidden"></div>
+      <div id="cal-name-field" class="cal-name-field hidden">
+        <label for="cal-name-input">Calendar name</label>
+        <input type="text" id="cal-name-input" placeholder="e.g. March Event, Cottage Trip" maxlength="60" autocomplete="off">
+      </div>
       <p id="modal-subtitle">Enter your name to get started.</p>
       <div id="existing-users"></div>
       <div class="modal-input-row">
@@ -38,6 +43,12 @@
         </div>
       </div>
     </header>
+
+    <!-- Calendar name -->
+    <div class="cal-name-wrap">
+      <span id="cal-name" class="cal-name"></span>
+      <button class="edit-cal-btn" onclick="startEditCalName()" aria-label="Rename">&#9998;</button>
+    </div>
 
     <!-- Legend -->
     <div class="legend">
@@ -82,6 +93,7 @@
   <!-- Tooltip -->
   <div id="day-tooltip" class="day-tooltip"></div>
 
+  <script src="lz-string.min.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

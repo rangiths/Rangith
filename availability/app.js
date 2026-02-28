@@ -5,7 +5,7 @@
   // days schema: { "YYYY-MM-DD": { "a": "busy"|"not-preferred", "n": "busy"|"not-preferred" } }
   // Only non-available slots are stored. Empty day objects are deleted.
 
-  var appState = { v: 2, users: [] };
+  var appState = { v: 2, name: '', users: [] };
   var currentUserIndex = -1;
 
   var today = new Date();
@@ -15,15 +15,12 @@
   // ── URL Encoding ───────────────────────────────────────────────────────────
 
   function encodeState(state) {
-    var json = JSON.stringify(state);
-    var b64 = btoa(unescape(encodeURIComponent(json)));
-    return b64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
+    return LZString.compressToEncodedURIComponent(JSON.stringify(state));
   }
 
   function decodeState(encoded) {
-    var padded = encoded + '==='.slice((encoded.length + 3) % 4);
-    var b64 = padded.replace(/-/g, '+').replace(/_/g, '/');
-    var json = decodeURIComponent(escape(atob(b64)));
+    var json = LZString.decompressFromEncodedURIComponent(encoded);
+    if (!json) throw new Error('decompression failed');
     return JSON.parse(json);
   }
 
@@ -374,12 +371,51 @@
     }
   });
 
+  // ── Calendar Naming ────────────────────────────────────────────────────────
+
+  window.startEditCalName = function () {
+    var wrap = document.querySelector('.cal-name-wrap');
+    var span = document.getElementById('cal-name');
+    var current = appState.name;
+    var input = document.createElement('input');
+    input.className = 'cal-name-input-inline';
+    input.value = current;
+    span.replaceWith(input);
+    input.focus();
+    input.select();
+
+    var saved = false;
+    function save() {
+      if (saved) return;
+      saved = true;
+      var val = input.value.trim() || current;
+      appState.name = val;
+      var newSpan = document.createElement('span');
+      newSpan.id = 'cal-name';
+      newSpan.className = 'cal-name';
+      newSpan.textContent = val;
+      input.replaceWith(newSpan);
+      updateShareLink();
+    }
+
+    input.addEventListener('blur', save);
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') { input.blur(); }
+      if (e.key === 'Escape') { input.value = current; input.blur(); }
+    });
+  };
+
   window.showModal = function () {
     updateModalSubtitle();
     document.getElementById('name-input').value = '';
     document.getElementById('name-error').textContent = '';
     document.getElementById('modal-overlay').classList.remove('hidden');
-    setTimeout(function () { document.getElementById('name-input').focus(); }, 50);
+    setTimeout(function () {
+      var first = appState.name === ''
+        ? document.getElementById('cal-name-input')
+        : document.getElementById('name-input');
+      first.focus();
+    }, 50);
   };
 
   function hideModal() {
@@ -389,17 +425,44 @@
   function updateModalSubtitle() {
     var users = appState.users;
     var existingEl = document.getElementById('existing-users');
-    if (users.length === 0) {
+    var calNameField = document.getElementById('cal-name-field');
+    var joiningLabel = document.getElementById('joining-label');
+
+    if (appState.name === '') {
+      // Fresh calendar: show calendar name input
+      calNameField.classList.remove('hidden');
+      joiningLabel.classList.add('hidden');
       document.getElementById('modal-subtitle').textContent = 'Enter your name to get started.';
       existingEl.innerHTML = '';
     } else {
-      document.getElementById('modal-subtitle').textContent = 'Enter your name to view and edit your availability.';
-      var names = users.map(function (u) { return '<li>' + escapeHtml(u.name) + '</li>'; }).join('');
-      existingEl.innerHTML = '<div class="existing-users-list"><p>Already marked availability:</p><ul>' + names + '</ul></div>';
+      // Shared calendar: show joining label, hide calendar name input
+      calNameField.classList.add('hidden');
+      joiningLabel.classList.remove('hidden');
+      joiningLabel.innerHTML = 'You\'re joining: <strong>' + escapeHtml(appState.name) + '</strong>';
+      if (users.length === 0) {
+        document.getElementById('modal-subtitle').textContent = 'Enter your name to get started.';
+        existingEl.innerHTML = '';
+      } else {
+        document.getElementById('modal-subtitle').textContent = 'Enter your name to view and edit your availability.';
+        var names = users.map(function (u) { return '<li>' + escapeHtml(u.name) + '</li>'; }).join('');
+        existingEl.innerHTML = '<div class="existing-users-list"><p>Already marked availability:</p><ul>' + names + '</ul></div>';
+      }
     }
   }
 
   window.handleNameSubmit = function () {
+    // Capture calendar name for fresh calendars
+    if (appState.name === '') {
+      var calInput = document.getElementById('cal-name-input');
+      var calName = calInput.value.trim();
+      if (!calName) {
+        calInput.focus();
+        document.getElementById('name-error').textContent = 'Please enter a calendar name.';
+        return;
+      }
+      appState.name = calName;
+    }
+
     var input = document.getElementById('name-input');
     var name = input.value.trim();
     if (!name) {
@@ -423,11 +486,16 @@
 
     sessionStorage.setItem('calUser', JSON.stringify({ name: name, userIndex: currentUserIndex }));
     document.getElementById('header-greeting').textContent = 'Hi, ' + name;
+    document.getElementById('cal-name').textContent = appState.name;
     document.getElementById('app').classList.remove('hidden');
     hideModal();
     renderCalendar();
     updateShareLink();
   };
+
+  document.getElementById('cal-name-input').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') document.getElementById('name-input').focus();
+  });
 
   document.getElementById('name-input').addEventListener('keydown', function (e) {
     if (e.key === 'Enter') window.handleNameSubmit();
@@ -472,6 +540,7 @@
     if (sessionValid) {
       currentUserIndex = session.userIndex;
       document.getElementById('header-greeting').textContent = 'Hi, ' + appState.users[currentUserIndex].name;
+      document.getElementById('cal-name').textContent = appState.name;
       document.getElementById('app').classList.remove('hidden');
       document.getElementById('modal-overlay').classList.add('hidden');
       renderCalendar();

@@ -260,6 +260,88 @@ body {
 .dot.orange { background: #fb8c00; }
 .dot.red    { background: #e53935; }
 
+/* ── Calendar name (header) ── */
+
+.cal-name-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.cal-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.edit-cal-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #bbb;
+  padding: 2px 4px;
+  line-height: 1;
+  transition: color 0.15s;
+}
+
+.edit-cal-btn:hover {
+  color: #555;
+}
+
+.cal-name-input-inline {
+  font-size: 1.2rem;
+  font-weight: 700;
+  border: none;
+  border-bottom: 2px solid #4a90e2;
+  outline: none;
+  background: transparent;
+  color: #1a1a1a;
+  min-width: 120px;
+  max-width: 280px;
+}
+
+/* ── Modal calendar name field ── */
+
+.cal-name-field {
+  margin-bottom: 14px;
+}
+
+.cal-name-field label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.cal-name-field input {
+  width: 100%;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.cal-name-field input:focus {
+  border-color: #4a90e2;
+}
+
+.joining-label {
+  font-size: 0.95rem;
+  color: #333;
+  margin-bottom: 14px;
+  padding: 10px 12px;
+  background: #f0f5ff;
+  border-radius: 8px;
+  border-left: 3px solid #4a90e2;
+}
+
 /* ── Slot hint ── */
 
 .slot-hint {
