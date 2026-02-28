@@ -24,6 +24,8 @@
         <button id="name-submit" onclick="handleNameSubmit()">Go</button>
       </div>
       <p id="name-error" class="name-error"></p>
+      <div id="modal-browse-divider" class="modal-divider hidden"><span>or</span></div>
+      <button id="browse-btn" class="browse-btn hidden" onclick="enterBrowseMode()">Just browsing</button>
     </div>
   </div>
 
@@ -56,7 +58,12 @@
       <span class="legend-item"><span class="dot orange"></span> Not preferred</span>
       <span class="legend-item"><span class="dot red"></span> Busy</span>
     </div>
-    <p class="slot-hint">Tap a day to mark the whole day. Tap &#9728; or &#9789; to mark afternoon/night separately.</p>
+    <!-- Browse mode banner -->
+    <div id="browse-banner" class="browse-banner hidden">
+      Read-only &middot; Browse Mode &mdash; <a href="#" onclick="showModal(); return false;">Enter your name to edit</a>
+    </div>
+
+    <p id="slot-hint" class="slot-hint">Tap a day to mark the whole day. Tap &#9728; or &#9789; to mark afternoon/night separately.</p>
 
     <!-- Warning banner (shown on corrupted hash) -->
     <div id="warning-banner" class="warning-banner hidden">
