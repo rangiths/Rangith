@@ -222,32 +222,21 @@
   }
 
   window.copyLink = async function () {
-    var input = document.getElementById('share-url');
     var btn = document.getElementById('copy-btn');
-    var url = input.value;
-
-    btn.textContent = 'Shortening…';
-    btn.disabled = true;
-
-    var toCopy = url;
-    try {
-      var resp = await fetch('https://da.gd/shorten?url=' + encodeURIComponent(url));
-      var short = await resp.text();
-      if (short && short.startsWith('https://da.gd/')) toCopy = short.trim();
-    } catch (e) { /* fall back to full URL */ }
+    var url = document.getElementById('share-url').value;
 
     var names = appState.users.map(function (u) { return u.name; }).join(', ');
     var message = '';
     if (appState.name) message += 'Event Name: ' + appState.name + '\n';
-    message += 'Please fill out your availability: ' + toCopy;
+    message += 'Please fill out your availability: ' + url;
     if (names) message += '\nAlready filled out: ' + names;
-    toCopy = message;
 
+    btn.disabled = true;
     try {
-      await navigator.clipboard.writeText(toCopy);
+      await navigator.clipboard.writeText(message);
     } catch (e) {
       var ta = document.createElement('textarea');
-      ta.value = toCopy;
+      ta.value = message;
       ta.style.position = 'fixed';
       ta.style.left = '-9999px';
       document.body.appendChild(ta);
