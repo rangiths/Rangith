@@ -225,18 +225,59 @@
     var btn = document.getElementById('copy-btn');
     var url = document.getElementById('share-url').value;
 
-    var names = appState.users.map(function (u) { return u.name; }).join(', ');
-    var message = '';
-    if (appState.name) message += 'Event Name: ' + appState.name + '\n';
-    message += 'Please fill out your availability: ' + url;
-    if (names) message += '\nAlready filled out: ' + names;
-
+    btn.textContent = 'Copying…';
     btn.disabled = true;
-    try {
-      await navigator.clipboard.writeText(message);
-    } catch (e) {
+
+    function buildMessage(link) {
+      var names = appState.users.map(function (u) { return u.name; }).join(', ');
+      var msg = '';
+      if (appState.name) msg += 'Event Name: ' + appState.name + '\n';
+      msg += 'Please fill out your availability: ' + link;
+      if (names) msg += '\nAlready filled out: ' + names;
+      return msg;
+    }
+
+    function shortenThenBlob() {
+      return fetch('https://da.gd/shorten?url=' + encodeURIComponent(url))
+        .then(function (r) { return r.text(); })
+        .then(function (short) {
+          var link = (short && short.startsWith('https://da.gd/')) ? short.trim() : url;
+          return new Blob([buildMessage(link)], { type: 'text/plain' });
+        })
+        .catch(function () {
+          return new Blob([buildMessage(url)], { type: 'text/plain' });
+        });
+    }
+
+    var copied = false;
+
+    // ClipboardItem + Promise: initiated synchronously (preserves iOS gesture context)
+    // while shortening resolves inside the Promise. Supported on iOS Safari 13.1+, Chrome 76+.
+    if (navigator.clipboard && window.ClipboardItem) {
+      try {
+        await navigator.clipboard.write([new ClipboardItem({ 'text/plain': shortenThenBlob() })]);
+        copied = true;
+      } catch (e) {}
+    }
+
+    // writeText fallback (Firefox, older browsers): gesture context less strict on desktop
+    if (!copied && navigator.clipboard) {
+      var toCopy = url;
+      try {
+        var resp = await fetch('https://da.gd/shorten?url=' + encodeURIComponent(url));
+        var short = await resp.text();
+        if (short && short.startsWith('https://da.gd/')) toCopy = short.trim();
+      } catch (e) {}
+      try {
+        await navigator.clipboard.writeText(buildMessage(toCopy));
+        copied = true;
+      } catch (e) {}
+    }
+
+    // execCommand fallback: use textarea to preserve newlines
+    if (!copied) {
       var ta = document.createElement('textarea');
-      ta.value = message;
+      ta.value = buildMessage(url);
       ta.style.position = 'fixed';
       ta.style.left = '-9999px';
       document.body.appendChild(ta);
