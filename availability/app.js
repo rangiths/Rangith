@@ -238,7 +238,7 @@
 
     var names = appState.users.map(function (u) { return u.name; }).join(', ');
     var message = '';
-    if (appState.name) message += appState.name + '\n';
+    if (appState.name) message += 'Event Name: ' + appState.name + '\n';
     message += 'Please fill out your availability: ' + toCopy;
     if (names) message += '\nAlready filled out: ' + names;
     toCopy = message;
