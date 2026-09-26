@@ -69,6 +69,12 @@
     letter-spacing: -0.02em;
     user-select: none;
     z-index: 0;
+    animation: breathe 5s ease-in-out infinite;
+  }
+
+  @keyframes breathe {
+    0%, 100% { opacity: 0.12; }
+    50%      { opacity: 0.19; }
   }
 
   .route-svg {
@@ -85,46 +91,45 @@
   .route-path {
     fill: none;
     stroke: var(--sky-deep);
-    stroke-width: 1.6;
+    stroke-width: 1.8;
     stroke-linecap: round;
-    stroke-dasharray: 6 8;
-    opacity: 0.6;
+    stroke-dasharray: 5 9;
+    opacity: 0.65;
+    animation: dash-flow 1.2s linear infinite;
   }
 
-  .route-draw {
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
-    animation: draw-route 1.8s ease-out 0.2s forwards;
-  }
-
-  @keyframes draw-route {
-    to { stroke-dashoffset: 0; }
-  }
-
-  .plane {
-    offset-path: path('M 8 92 C 220 10, 520 10, 762 46');
-    offset-rotate: auto;
-    animation: fly 2.2s cubic-bezier(0.3, 0.1, 0.3, 1) 0.3s forwards;
-    transform-origin: center;
-  }
-
-  @keyframes fly {
-    0%   { offset-distance: 0%;   opacity: 0; }
-    8%   { opacity: 1; }
-    92%  { opacity: 1; }
-    100% { offset-distance: 100%; opacity: 0; }
+  @keyframes dash-flow {
+    to { stroke-dashoffset: -14; }
   }
 
   .dot-start, .dot-end {
     fill: var(--sky-deep);
-    opacity: 0;
-    animation: dot-in 0.4s ease-out forwards;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: pulse 2.4s ease-in-out infinite;
   }
-  .dot-start { animation-delay: 0.15s; }
-  .dot-end   { animation-delay: 1.95s; }
+  .dot-end { animation-delay: 1.2s; }
 
-  @keyframes dot-in {
-    to { opacity: 0.7; }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.45; transform: scale(1); }
+    50%      { opacity: 1;    transform: scale(1.5); }
+  }
+
+  .plane {
+    opacity: 0;
+    animation: fly-loop 4.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    animation-delay: 0.6s;
+  }
+
+  @keyframes fly-loop {
+    0%   { transform: translate(8px, 92px)   rotate(-16deg); opacity: 0; }
+    6%   { opacity: 1; }
+    20%  { transform: translate(144px, 52px) rotate(-13deg); }
+    40%  { transform: translate(295px, 30px) rotate(-6deg); }
+    60%  { transform: translate(453px, 23px) rotate(1deg); }
+    80%  { transform: translate(611px, 29px) rotate(5deg); }
+    94%  { opacity: 1; }
+    100% { transform: translate(762px, 46px) rotate(6deg); opacity: 0; }
   }
 
   .hero-inner {
@@ -150,10 +155,13 @@
     font-family: 'Fraunces', serif;
     font-weight: 600;
     font-size: clamp(30px, 5vw, 44px);
-    line-height: 1.18;
+    line-height: 1.22;
     margin: 0 0 22px;
-    max-width: 13ch;
     color: var(--brown-deep);
+  }
+
+  h1 span {
+    display: block;
   }
 
   .lede {
@@ -207,7 +215,19 @@
     opacity: 1;
   }
 
-  .stamp svg { width: 26px; height: 26px; }
+  .stamp svg {
+    width: 26px;
+    height: 26px;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: wiggle 2.8s ease-in-out infinite;
+  }
+
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(-6deg); }
+    50%      { transform: rotate(6deg); }
+  }
+
   .stamp svg path { stroke: var(--brown); }
 
   .year-num {
@@ -295,6 +315,16 @@
   .ticket-stub svg { width: 20px; height: 20px; }
   .ticket-stub svg path { stroke: var(--sky); }
 
+  .albums a:hover .ticket-stub svg,
+  .albums a:focus-visible .ticket-stub svg {
+    animation: nudge 0.6s ease-in-out infinite;
+  }
+
+  @keyframes nudge {
+    0%, 100% { transform: translateX(0); }
+    50%      { transform: translateX(3px); }
+  }
+
   .stub-label {
     font-size: 10.5px;
     letter-spacing: 0.08em;
@@ -365,13 +395,12 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero-inner, .year-block, .stamp, .plane, .dot-start, .dot-end, .route-draw, .leaf {
+    *, *::before, *::after {
       animation: none !important;
       transition: none !important;
-      opacity: 1 !important;
-      transform: none !important;
     }
-    .route-path { stroke-dashoffset: 0; }
+    .hero-inner, .year-block, .stamp { opacity: 1 !important; transform: none !important; }
+    .plane { opacity: 1 !important; transform: translate(400px, 30px) !important; }
   }
 
   @media (max-width: 560px) {
@@ -391,7 +420,7 @@
     <div class="hero-watermark" aria-hidden="true">80</div>
 
     <svg class="route-svg" viewBox="0 0 770 130" preserveAspectRatio="none" aria-hidden="true">
-      <path class="route-path route-draw" d="M 8 92 C 220 10, 520 10, 762 46" />
+      <path class="route-path" d="M 8 92 C 220 10, 520 10, 762 46" />
       <circle class="dot-start" cx="8" cy="92" r="4" />
       <circle class="dot-end" cx="762" cy="46" r="4" />
       <g class="plane">
@@ -403,7 +432,7 @@
 
     <div class="wrap hero-inner">
       <p class="kicker">Jaffna Central College · Batch of 1980</p>
-      <h1>Old friends from 1980, still traveling together</h1>
+      <h1><span>Old friends from 1980</span><span>still traveling together</span></h1>
       <p class="lede">We finished school together at Jaffna Central College in 1980. Since then, we've moved to different countries and built our own lives.</p>
       <p class="lede">Now that retirement is close, we make time to meet. Small groups get together wherever a few of us live. And once a year, as many of us as possible travel together on a group tour.</p>
       <p class="lede">Here are the photos from those tours, year by year.</p>
