@@ -10,16 +10,15 @@
 <style>
 
   :root {
-    --maroon: #5C1A2B;
-    --maroon-deep: #43121F;
-    --brass: #A9832F;
-    --brass-soft: #C7A45E;
-    --parchment: #EFE7D8;
-    --parchment-line: #DCD0B8;
-    --ink: #241712;
-    --ink-soft: #55483D;
-    --green: #2F5D50;
-    --sky: #3E6E7E;
+    --sky: #D8E7EE;
+    --sky-line: #BFD6E1;
+    --sky-deep: #4E7C90;
+    --brown: #6B4226;
+    --brown-deep: #4A2C18;
+    --brown-soft: #97724F;
+    --card: #F6F0E4;
+    --ink: #2B211B;
+    --ink-soft: #5C4C3E;
   }
 
   * { box-sizing: border-box; }
@@ -27,7 +26,7 @@
 
   body {
     margin: 0;
-    background: var(--parchment);
+    background: var(--sky);
     color: var(--ink);
     font-family: 'Source Serif 4', Georgia, serif;
     font-size: 17px;
@@ -39,7 +38,7 @@
   a { color: inherit; }
 
   a:focus-visible, button:focus-visible {
-    outline: 2px solid var(--maroon);
+    outline: 2px solid var(--brown);
     outline-offset: 3px;
   }
 
@@ -65,8 +64,8 @@
     font-weight: 700;
     font-size: min(42vw, 360px);
     line-height: 1;
-    color: var(--brass);
-    opacity: 0.13;
+    color: var(--brown-soft);
+    opacity: 0.14;
     letter-spacing: -0.02em;
     user-select: none;
     z-index: 0;
@@ -85,11 +84,11 @@
 
   .route-path {
     fill: none;
-    stroke: var(--sky);
+    stroke: var(--sky-deep);
     stroke-width: 1.6;
     stroke-linecap: round;
     stroke-dasharray: 6 8;
-    opacity: 0.55;
+    opacity: 0.6;
   }
 
   .route-draw {
@@ -117,7 +116,7 @@
   }
 
   .dot-start, .dot-end {
-    fill: var(--sky);
+    fill: var(--sky-deep);
     opacity: 0;
     animation: dot-in 0.4s ease-out forwards;
   }
@@ -142,7 +141,7 @@
 
   .kicker {
     font-size: 15px;
-    color: var(--maroon);
+    color: var(--brown);
     font-style: italic;
     margin: 0 0 18px;
   }
@@ -153,8 +152,8 @@
     font-size: clamp(30px, 5vw, 44px);
     line-height: 1.18;
     margin: 0 0 22px;
-    max-width: 11ch;
-    color: var(--maroon-deep);
+    max-width: 13ch;
+    color: var(--brown-deep);
   }
 
   .lede {
@@ -171,7 +170,7 @@
 
   .year-block {
     padding: 54px 0 12px;
-    border-top: 1px solid var(--parchment-line);
+    border-top: 1px solid var(--sky-line);
     opacity: 0;
     transform: translateY(22px);
     transition: opacity 0.7s ease, transform 0.7s ease;
@@ -194,7 +193,7 @@
     width: 64px;
     height: 64px;
     border-radius: 50%;
-    border: 1.5px dashed var(--maroon);
+    border: 1.5px dashed var(--brown);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -209,14 +208,14 @@
   }
 
   .stamp svg { width: 26px; height: 26px; }
-  .stamp svg path, .stamp svg circle { stroke: var(--maroon); }
+  .stamp svg path { stroke: var(--brown); }
 
   .year-num {
     font-family: 'Fraunces', serif;
     font-weight: 700;
     font-style: italic;
     font-size: 40px;
-    color: var(--maroon);
+    color: var(--brown);
   }
 
   .year-count {
@@ -244,8 +243,8 @@
     grid-template-columns: 1fr auto;
     align-items: stretch;
     text-decoration: none;
-    background: #F8F3E6;
-    border: 1px solid var(--parchment-line);
+    background: var(--card);
+    border: 1px solid var(--sky-line);
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
@@ -253,28 +252,19 @@
 
   .albums a:hover, .albums a:focus-visible {
     transform: translateY(-3px);
-    box-shadow: 0 10px 22px -12px rgba(67, 18, 31, 0.45);
-    border-color: var(--brass-soft);
+    box-shadow: 0 10px 22px -12px rgba(74, 44, 24, 0.4);
+    border-color: var(--brown-soft);
   }
 
   .ticket-main {
-    padding: 18px 20px;
+    padding: 20px;
     display: flex;
-    flex-direction: column;
-    gap: 4px;
-    justify-content: center;
+    align-items: center;
   }
 
   .album-label {
     font-size: 17px;
     color: var(--ink);
-  }
-
-  .album-caption {
-    font-size: 12.5px;
-    letter-spacing: 0.03em;
-    color: var(--ink-soft);
-    font-style: italic;
   }
 
   .ticket-stub {
@@ -286,8 +276,8 @@
     align-items: center;
     justify-content: center;
     gap: 6px;
-    background: var(--maroon);
-    color: var(--parchment);
+    background: var(--brown);
+    color: var(--sky);
   }
 
   .ticket-stub::before {
@@ -297,13 +287,13 @@
     top: 50%;
     width: 12px;
     height: 12px;
-    background: var(--parchment);
+    background: var(--sky);
     border-radius: 50%;
     transform: translateY(-50%);
   }
 
   .ticket-stub svg { width: 20px; height: 20px; }
-  .ticket-stub svg path { stroke: var(--parchment); }
+  .ticket-stub svg path { stroke: var(--sky); }
 
   .stub-label {
     font-size: 10.5px;
@@ -316,7 +306,7 @@
   footer {
     position: relative;
     padding: 60px 0 100px;
-    border-top: 1px solid var(--parchment-line);
+    border-top: 1px solid var(--sky-line);
     margin-top: 8px;
     overflow: hidden;
   }
@@ -332,7 +322,7 @@
     animation: sway 6s ease-in-out infinite alternate;
   }
 
-  .leaf path { fill: var(--green); }
+  .leaf path { fill: var(--brown); }
 
   @keyframes sway {
     from { transform: rotate(-3deg); }
@@ -343,7 +333,7 @@
     font-family: 'Fraunces', serif;
     font-style: italic;
     font-size: 19px;
-    color: var(--green);
+    color: var(--brown);
     margin: 0 0 6px;
     position: relative;
     z-index: 1;
@@ -406,16 +396,17 @@
       <circle class="dot-end" cx="762" cy="46" r="4" />
       <g class="plane">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-          <path d="M2 16.5l19-9-9 19-2.5-8-7.5-2z" fill="var(--maroon)" stroke="var(--maroon)" stroke-width="0.5" stroke-linejoin="round"/>
+          <path d="M2 16.5l19-9-9 19-2.5-8-7.5-2z" fill="var(--brown)" stroke="var(--brown)" stroke-width="0.5" stroke-linejoin="round"/>
         </svg>
       </g>
     </svg>
 
     <div class="wrap hero-inner">
       <p class="kicker">Jaffna Central College · Batch of 1980</p>
-      <h1>We sat the A/Levels together in 1980. Now we're making up for lost time.</h1>
-      <p class="lede">From Jaffna, we went on to build our lives an ocean apart — from home, and from each other. With retirement coming into view, we've settled into a rhythm: a small get-together wherever a few of us happen to be living, and once a year, a proper trip together, as many of the batch as can make it.</p>
-      <p class="lede">Below are the albums from those trips, one year at a time.</p>
+      <h1>Old friends from 1980, still traveling together</h1>
+      <p class="lede">We finished school together at Jaffna Central College in 1980. Since then, we've moved to different countries and built our own lives.</p>
+      <p class="lede">Now that retirement is close, we make time to meet. Small groups get together wherever a few of us live. And once a year, as many of us as possible travel together on a group tour.</p>
+      <p class="lede">Here are the photos from those tours, year by year.</p>
     </div>
   </header>
 
@@ -431,27 +422,27 @@
       </div>
       <ul class="albums">
         <li><a href="https://photos.app.goo.gl/USGdkjiDguxQHcWh9" target="_blank" rel="noopener">
-          <span class="ticket-main"><span class="album-label">Photo album</span><span class="album-caption">Batch tour · 2024</span></span>
+          <span class="ticket-main"><span class="album-label">[Add destination]</span></span>
           <span class="ticket-stub"><svg viewBox="0 0 24 24" fill="none"><path d="M2 16.5l19-9-9 19-2.5-8-7.5-2z" stroke-width="1.4" stroke-linejoin="round"/></svg><span class="stub-label">View</span></span>
         </a></li>
         <li><a href="https://photos.app.goo.gl/krrbp4rDAVKT9XWe9" target="_blank" rel="noopener">
-          <span class="ticket-main"><span class="album-label">Photo album</span><span class="album-caption">Batch tour · 2024</span></span>
+          <span class="ticket-main"><span class="album-label">[Add destination]</span></span>
           <span class="ticket-stub"><svg viewBox="0 0 24 24" fill="none"><path d="M2 16.5l19-9-9 19-2.5-8-7.5-2z" stroke-width="1.4" stroke-linejoin="round"/></svg><span class="stub-label">View</span></span>
         </a></li>
         <li><a href="https://photos.app.goo.gl/v6eZCd6thdUV3uby9" target="_blank" rel="noopener">
-          <span class="ticket-main"><span class="album-label">Photo album</span><span class="album-caption">Batch tour · 2024</span></span>
+          <span class="ticket-main"><span class="album-label">[Add destination]</span></span>
           <span class="ticket-stub"><svg viewBox="0 0 24 24" fill="none"><path d="M2 16.5l19-9-9 19-2.5-8-7.5-2z" stroke-width="1.4" stroke-linejoin="round"/></svg><span class="stub-label">View</span></span>
         </a></li>
         <li><a href="https://photos.app.goo.gl/diKmVgzsQy52tYV46" target="_blank" rel="noopener">
-          <span class="ticket-main"><span class="album-label">Photo album</span><span class="album-caption">Batch tour · 2024</span></span>
+          <span class="ticket-main"><span class="album-label">[Add destination]</span></span>
           <span class="ticket-stub"><svg viewBox="0 0 24 24" fill="none"><path d="M2 16.5l19-9-9 19-2.5-8-7.5-2z" stroke-width="1.4" stroke-linejoin="round"/></svg><span class="stub-label">View</span></span>
         </a></li>
         <li><a href="https://photos.app.goo.gl/8MCs8wYueynrfgiF6" target="_blank" rel="noopener">
-          <span class="ticket-main"><span class="album-label">Photo album</span><span class="album-caption">Batch tour · 2024</span></span>
+          <span class="ticket-main"><span class="album-label">[Add destination]</span></span>
           <span class="ticket-stub"><svg viewBox="0 0 24 24" fill="none"><path d="M2 16.5l19-9-9 19-2.5-8-7.5-2z" stroke-width="1.4" stroke-linejoin="round"/></svg><span class="stub-label">View</span></span>
         </a></li>
         <li><a href="https://photos.app.goo.gl/z2Vp7drkERvSqHWM8" target="_blank" rel="noopener">
-          <span class="ticket-main"><span class="album-label">Photo album</span><span class="album-caption">Batch tour · 2024</span></span>
+          <span class="ticket-main"><span class="album-label">[Add destination]</span></span>
           <span class="ticket-stub"><svg viewBox="0 0 24 24" fill="none"><path d="M2 16.5l19-9-9 19-2.5-8-7.5-2z" stroke-width="1.4" stroke-linejoin="round"/></svg><span class="stub-label">View</span></span>
         </a></li>
       </ul>
@@ -467,11 +458,11 @@
       </div>
       <ul class="albums">
         <li><a href="https://photos.app.goo.gl/vdsdeVU3Bi2cr4uYA" target="_blank" rel="noopener">
-          <span class="ticket-main"><span class="album-label">Photo album</span><span class="album-caption">Batch tour · 2025</span></span>
+          <span class="ticket-main"><span class="album-label">[Add destination]</span></span>
           <span class="ticket-stub"><svg viewBox="0 0 24 24" fill="none"><path d="M2 16.5l19-9-9 19-2.5-8-7.5-2z" stroke-width="1.4" stroke-linejoin="round"/></svg><span class="stub-label">View</span></span>
         </a></li>
         <li><a href="https://photos.app.goo.gl/cL21dnRszh6dtHPF8" target="_blank" rel="noopener">
-          <span class="ticket-main"><span class="album-label">Photo album</span><span class="album-caption">Batch tour · 2025</span></span>
+          <span class="ticket-main"><span class="album-label">[Add destination]</span></span>
           <span class="ticket-stub"><svg viewBox="0 0 24 24" fill="none"><path d="M2 16.5l19-9-9 19-2.5-8-7.5-2z" stroke-width="1.4" stroke-linejoin="round"/></svg><span class="stub-label">View</span></span>
         </a></li>
       </ul>
@@ -487,23 +478,23 @@
       </div>
       <ul class="albums">
         <li><a href="https://photos.app.goo.gl/tzN7sticXDRM56Gy5" target="_blank" rel="noopener">
-          <span class="ticket-main"><span class="album-label">Photo album</span><span class="album-caption">Batch tour · 2026</span></span>
+          <span class="ticket-main"><span class="album-label">[Add destination]</span></span>
           <span class="ticket-stub"><svg viewBox="0 0 24 24" fill="none"><path d="M2 16.5l19-9-9 19-2.5-8-7.5-2z" stroke-width="1.4" stroke-linejoin="round"/></svg><span class="stub-label">View</span></span>
         </a></li>
         <li><a href="https://photos.app.goo.gl/eJWZdh9sTrknEXiL9" target="_blank" rel="noopener">
-          <span class="ticket-main"><span class="album-label">Photo album</span><span class="album-caption">Batch tour · 2026</span></span>
+          <span class="ticket-main"><span class="album-label">[Add destination]</span></span>
           <span class="ticket-stub"><svg viewBox="0 0 24 24" fill="none"><path d="M2 16.5l19-9-9 19-2.5-8-7.5-2z" stroke-width="1.4" stroke-linejoin="round"/></svg><span class="stub-label">View</span></span>
         </a></li>
         <li><a href="https://photos.app.goo.gl/47JjNRNfwQHuY1PUA" target="_blank" rel="noopener">
-          <span class="ticket-main"><span class="album-label">Photo album</span><span class="album-caption">Batch tour · 2026</span></span>
+          <span class="ticket-main"><span class="album-label">[Add destination]</span></span>
           <span class="ticket-stub"><svg viewBox="0 0 24 24" fill="none"><path d="M2 16.5l19-9-9 19-2.5-8-7.5-2z" stroke-width="1.4" stroke-linejoin="round"/></svg><span class="stub-label">View</span></span>
         </a></li>
         <li><a href="https://photos.app.goo.gl/qLBYuCwgyCLcqexPA" target="_blank" rel="noopener">
-          <span class="ticket-main"><span class="album-label">Photo album</span><span class="album-caption">Batch tour · 2026</span></span>
+          <span class="ticket-main"><span class="album-label">[Add destination]</span></span>
           <span class="ticket-stub"><svg viewBox="0 0 24 24" fill="none"><path d="M2 16.5l19-9-9 19-2.5-8-7.5-2z" stroke-width="1.4" stroke-linejoin="round"/></svg><span class="stub-label">View</span></span>
         </a></li>
         <li><a href="https://photos.app.goo.gl/yabvK718gjvofLJU7" target="_blank" rel="noopener">
-          <span class="ticket-main"><span class="album-label">Photo album</span><span class="album-caption">Batch tour · 2026</span></span>
+          <span class="ticket-main"><span class="album-label">[Add destination]</span></span>
           <span class="ticket-stub"><svg viewBox="0 0 24 24" fill="none"><path d="M2 16.5l19-9-9 19-2.5-8-7.5-2z" stroke-width="1.4" stroke-linejoin="round"/></svg><span class="stub-label">View</span></span>
         </a></li>
       </ul>
@@ -516,10 +507,10 @@
     -->
 
     <!--
-      TIP: to show a destination instead of "Photo album" (e.g. "Kandy &
-      Nuwara Eliya"), replace the text inside the matching
-      <span class="album-label"> tag. You can also edit the small
-      caption line below it.
+      TO NAME AN ALBUM:
+      Replace the text "[Add destination]" inside the matching
+      <span class="album-label"> tag with the place name, e.g. "Kandy
+      & Nuwara Eliya".
     -->
 
   </main>
