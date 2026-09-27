@@ -147,17 +147,19 @@
     opacity: 0;
     animation: fly-loop 4.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
     animation-delay: 0.6s;
+    font-size: 22px;
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
   }
 
   @keyframes fly-loop {
-    0%   { transform: translate(8px, 92px)   rotate(-16deg); opacity: 0; }
+    0%   { transform: translate(8px, 92px); opacity: 0; }
     6%   { opacity: 1; }
-    20%  { transform: translate(144px, 52px) rotate(-13deg); }
-    40%  { transform: translate(295px, 30px) rotate(-6deg); }
-    60%  { transform: translate(453px, 23px) rotate(1deg); }
-    80%  { transform: translate(611px, 29px) rotate(5deg); }
+    20%  { transform: translate(144px, 52px); }
+    40%  { transform: translate(295px, 30px); }
+    60%  { transform: translate(453px, 23px); }
+    80%  { transform: translate(611px, 29px); }
     94%  { opacity: 1; }
-    100% { transform: translate(762px, 46px) rotate(6deg); opacity: 0; }
+    100% { transform: translate(762px, 46px); opacity: 0; }
   }
 
   .hero-inner {
@@ -287,10 +289,25 @@
     margin: 0;
     padding: 0;
     display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 14px;
   }
 
-  .albums li { position: relative; }
+  .albums li {
+    position: relative;
+    opacity: 0;
+    transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease;
+  }
+
+  .albums li.from-left   { transform: translateX(-70px); }
+  .albums li.from-right  { transform: translateX(70px); }
+  .albums li.from-top    { transform: translateY(-70px); }
+  .albums li.from-bottom { transform: translateY(70px); }
+
+  .year-block.in-view .albums li {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
 
   .albums a {
     position: relative;
@@ -436,6 +453,7 @@
       transition: none !important;
     }
     .hero-inner, .year-block, .stamp { opacity: 1 !important; transform: none !important; }
+    .albums li { opacity: 1 !important; transform: none !important; }
     .plane { opacity: 1 !important; transform: translate(400px, 30px) !important; }
     .crest { left: calc(100% - 112px) !important; transform: none !important; opacity: 1 !important; }
   }
@@ -448,6 +466,7 @@
     .stamp { width: 52px; height: 52px; }
     .ticket-stub { width: 74px; }
     .route-svg { top: 20px; height: 100px; }
+    .albums { grid-template-columns: 1fr; }
   }
 
 </style>
@@ -463,11 +482,7 @@
       <path class="route-path" d="M 8 92 C 220 10, 520 10, 762 46" />
       <circle class="dot-start" cx="8" cy="92" r="4" />
       <circle class="dot-end" cx="762" cy="46" r="4" />
-      <g class="plane">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-          <path d="M2 16.5l19-9-9 19-2.5-8-7.5-2z" fill="var(--brown)" stroke="var(--brown)" stroke-width="0.5" stroke-linejoin="round"/>
-        </svg>
-      </g>
+      <text class="plane" x="0" y="18">✈️</text>
     </svg>
 
     <div class="wrap hero-inner">
@@ -492,27 +507,27 @@
       </div>
       <ul class="albums">
         <li><a href="https://photos.app.goo.gl/USGdkjiDguxQHcWh9" target="_blank" rel="noopener">
-          <span class="ticket-main"><span class="album-label">🇸🇬  Singapore</span></span>
+          <span class="ticket-main"><span class="album-label">🇸🇬 Singapore</span></span>
           <span class="ticket-stub"><svg viewBox="0 0 24 24" fill="none"><path d="M2 16.5l19-9-9 19-2.5-8-7.5-2z" stroke-width="1.4" stroke-linejoin="round"/></svg><span class="stub-label">View</span></span>
         </a></li>
         <li><a href="https://photos.app.goo.gl/krrbp4rDAVKT9XWe9" target="_blank" rel="noopener">
-          <span class="ticket-main"><span class="album-label">🇻🇳  Vietnam</span></span>
+          <span class="ticket-main"><span class="album-label">🇻🇳 Vietnam</span></span>
           <span class="ticket-stub"><svg viewBox="0 0 24 24" fill="none"><path d="M2 16.5l19-9-9 19-2.5-8-7.5-2z" stroke-width="1.4" stroke-linejoin="round"/></svg><span class="stub-label">View</span></span>
         </a></li>
         <li><a href="https://photos.app.goo.gl/v6eZCd6thdUV3uby9" target="_blank" rel="noopener">
-          <span class="ticket-main"><span class="album-label">🇰🇭  Cambodia</span></span>
+          <span class="ticket-main"><span class="album-label">🇰🇭 Cambodia</span></span>
           <span class="ticket-stub"><svg viewBox="0 0 24 24" fill="none"><path d="M2 16.5l19-9-9 19-2.5-8-7.5-2z" stroke-width="1.4" stroke-linejoin="round"/></svg><span class="stub-label">View</span></span>
         </a></li>
         <li><a href="https://photos.app.goo.gl/diKmVgzsQy52tYV46" target="_blank" rel="noopener">
-          <span class="ticket-main"><span class="album-label">🇲🇾  Kuala Lumpur</span></span>
+          <span class="ticket-main"><span class="album-label">🇲🇾 Kuala Lumpur</span></span>
           <span class="ticket-stub"><svg viewBox="0 0 24 24" fill="none"><path d="M2 16.5l19-9-9 19-2.5-8-7.5-2z" stroke-width="1.4" stroke-linejoin="round"/></svg><span class="stub-label">View</span></span>
         </a></li>
         <li><a href="https://photos.app.goo.gl/8MCs8wYueynrfgiF6" target="_blank" rel="noopener">
-          <span class="ticket-main"><span class="album-label">🏝️  Langhawi</span></span>
+          <span class="ticket-main"><span class="album-label">🏝️ Langhawi</span></span>
           <span class="ticket-stub"><svg viewBox="0 0 24 24" fill="none"><path d="M2 16.5l19-9-9 19-2.5-8-7.5-2z" stroke-width="1.4" stroke-linejoin="round"/></svg><span class="stub-label">View</span></span>
         </a></li>
         <li><a href="https://photos.app.goo.gl/z2Vp7drkERvSqHWM8" target="_blank" rel="noopener">
-          <span class="ticket-main"><span class="album-label">🌏  Trip to East Asia 2024</span></span>
+          <span class="ticket-main"><span class="album-label">🌏 Trip to East Asia 2024</span></span>
           <span class="ticket-stub"><svg viewBox="0 0 24 24" fill="none"><path d="M2 16.5l19-9-9 19-2.5-8-7.5-2z" stroke-width="1.4" stroke-linejoin="round"/></svg><span class="stub-label">View</span></span>
         </a></li>
       </ul>
@@ -529,11 +544,11 @@
       </div>
       <ul class="albums">
         <li><a href="https://photos.app.goo.gl/vdsdeVU3Bi2cr4uYA" target="_blank" rel="noopener">
-          <span class="ticket-main"><span class="album-label">🇹🇭  Bangkok</span></span>
+          <span class="ticket-main"><span class="album-label">🇹🇭 Bangkok</span></span>
           <span class="ticket-stub"><svg viewBox="0 0 24 24" fill="none"><path d="M2 16.5l19-9-9 19-2.5-8-7.5-2z" stroke-width="1.4" stroke-linejoin="round"/></svg><span class="stub-label">View</span></span>
         </a></li>
         <li><a href="https://photos.app.goo.gl/cL21dnRszh6dtHPF8" target="_blank" rel="noopener">
-          <span class="ticket-main"><span class="album-label">🛕  Bali</span></span>
+          <span class="ticket-main"><span class="album-label">🇮🇩 Bali</span></span>
           <span class="ticket-stub"><svg viewBox="0 0 24 24" fill="none"><path d="M2 16.5l19-9-9 19-2.5-8-7.5-2z" stroke-width="1.4" stroke-linejoin="round"/></svg><span class="stub-label">View</span></span>
         </a></li>
       </ul>
@@ -550,23 +565,23 @@
       </div>
       <ul class="albums">
         <li><a href="https://photos.app.goo.gl/tzN7sticXDRM56Gy5" target="_blank" rel="noopener">
-          <span class="ticket-main"><span class="album-label">⛩️  Kyoto</span></span>
+          <span class="ticket-main"><span class="album-label">⛩️ Kyoto</span></span>
           <span class="ticket-stub"><svg viewBox="0 0 24 24" fill="none"><path d="M2 16.5l19-9-9 19-2.5-8-7.5-2z" stroke-width="1.4" stroke-linejoin="round"/></svg><span class="stub-label">View</span></span>
         </a></li>
         <li><a href="https://photos.app.goo.gl/eJWZdh9sTrknEXiL9" target="_blank" rel="noopener">
-          <span class="ticket-main"><span class="album-label">🏯  Osaka</span></span>
+          <span class="ticket-main"><span class="album-label">🏯 Osaka</span></span>
           <span class="ticket-stub"><svg viewBox="0 0 24 24" fill="none"><path d="M2 16.5l19-9-9 19-2.5-8-7.5-2z" stroke-width="1.4" stroke-linejoin="round"/></svg><span class="stub-label">View</span></span>
         </a></li>
         <li><a href="https://photos.app.goo.gl/47JjNRNfwQHuY1PUA" target="_blank" rel="noopener">
-          <span class="ticket-main"><span class="album-label">🕊️  Hiroshima</span></span>
+          <span class="ticket-main"><span class="album-label">🇯🇵 Hiroshima</span></span>
           <span class="ticket-stub"><svg viewBox="0 0 24 24" fill="none"><path d="M2 16.5l19-9-9 19-2.5-8-7.5-2z" stroke-width="1.4" stroke-linejoin="round"/></svg><span class="stub-label">View</span></span>
         </a></li>
         <li><a href="https://photos.app.goo.gl/qLBYuCwgyCLcqexPA" target="_blank" rel="noopener">
-          <span class="ticket-main"><span class="album-label">🗻  Mt. Fuji</span></span>
+          <span class="ticket-main"><span class="album-label">🗻 Mt. Fuji</span></span>
           <span class="ticket-stub"><svg viewBox="0 0 24 24" fill="none"><path d="M2 16.5l19-9-9 19-2.5-8-7.5-2z" stroke-width="1.4" stroke-linejoin="round"/></svg><span class="stub-label">View</span></span>
         </a></li>
         <li><a href="https://photos.app.goo.gl/yabvK718gjvofLJU7" target="_blank" rel="noopener">
-          <span class="ticket-main"><span class="album-label">🗼  Tokyo</span></span>
+          <span class="ticket-main"><span class="album-label">🗼 Tokyo</span></span>
           <span class="ticket-stub"><svg viewBox="0 0 24 24" fill="none"><path d="M2 16.5l19-9-9 19-2.5-8-7.5-2z" stroke-width="1.4" stroke-linejoin="round"/></svg><span class="stub-label">View</span></span>
         </a></li>
       </ul>
@@ -598,6 +613,15 @@
   </footer>
 
   <script>
+    // Give each album card a random entry direction and a slight stagger,
+    // so they appear to converge in from different sides.
+    var directions = ['from-left', 'from-right', 'from-top', 'from-bottom'];
+    document.querySelectorAll('.albums li').forEach(function (li, i) {
+      var dir = directions[Math.floor(Math.random() * directions.length)];
+      li.classList.add(dir);
+      li.style.transitionDelay = (i * 70) + 'ms';
+    });
+
     // Reveal each year block (and its stamp) as it scrolls into view.
     var blocks = document.querySelectorAll('.year-block');
     if ('IntersectionObserver' in window) {
