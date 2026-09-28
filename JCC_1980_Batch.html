@@ -125,14 +125,25 @@
     animation: pulse 2.4s ease-in-out infinite;
   }
 
+  .route-labels {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 38px;
+    height: 130px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
   .route-label {
+    position: absolute;
+    transform: translateX(-50%);
     font-family: 'Source Serif 4', Georgia, serif;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 700;
     font-style: italic;
-    fill: var(--brown);
-    text-anchor: middle;
-    opacity: 0.9;
+    color: var(--brown);
+    white-space: nowrap;
   }
 
   @keyframes pulse {
@@ -474,6 +485,7 @@
     .stamp { width: 52px; height: 52px; }
     .ticket-stub { width: 74px; }
     .route-svg { top: 20px; height: 100px; }
+    .route-labels { top: 20px; height: 100px; }
     .albums { grid-template-columns: 1fr; }
   }
 
@@ -490,22 +502,21 @@
       <path class="route-path" d="M 45 95 C 110 40, 160 30, 225 30 C 290 30, 340 85, 400 85 C 460 85, 520 25, 575 25 C 630 25, 685 65, 725 65" />
 
       <circle class="route-dot" cx="45" cy="95" r="4" style="animation-delay:0s" />
-      <text class="route-label" x="45" y="115">Sri Lanka</text>
-
       <circle class="route-dot" cx="225" cy="30" r="4" style="animation-delay:0.3s" />
-      <text class="route-label" x="225" y="50">UK</text>
-
       <circle class="route-dot" cx="400" cy="85" r="4" style="animation-delay:0.6s" />
-      <text class="route-label" x="400" y="105">Australia</text>
-
       <circle class="route-dot" cx="575" cy="25" r="4" style="animation-delay:0.9s" />
-      <text class="route-label" x="575" y="45">USA</text>
-
       <circle class="route-dot" cx="725" cy="65" r="4" style="animation-delay:1.2s" />
-      <text class="route-label" x="725" y="85">Canada</text>
 
       <text class="plane" x="0" y="18">✈️</text>
     </svg>
+
+    <div class="route-labels" aria-hidden="true">
+      <span class="route-label" style="left:5.8%; top:88.5%">Sri Lanka</span>
+      <span class="route-label" style="left:29.2%; top:38.5%">UK</span>
+      <span class="route-label" style="left:52%; top:80.8%">Australia</span>
+      <span class="route-label" style="left:74.7%; top:34.6%">USA</span>
+      <span class="route-label" style="left:94.2%; top:65.4%">Canada</span>
+    </div>
 
     <div class="wrap hero-inner">
       <p class="kicker">Jaffna Central College · Batch of 1980</p>
