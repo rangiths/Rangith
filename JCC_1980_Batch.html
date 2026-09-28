@@ -52,35 +52,23 @@
 
   .crest {
     position: fixed;
-    top: 18px;
+    top: -30px;
     left: 18px;
     width: 92px;
     height: auto;
     z-index: 80;
     filter: drop-shadow(0 8px 16px rgba(74, 44, 24, 0.4));
-    animation: crest-travel 8.6s cubic-bezier(0.22, 1, 0.36, 1) 0.6s forwards;
-  }
-
-  @keyframes crest-travel {
-    0%   { left: 18px;              transform: scale(0.85) rotate(-8deg); opacity: 0; }
-    12%  { opacity: 1; }
-    100% { left: calc(100% - 112px); transform: scale(1) rotate(0deg);    opacity: 1; }
   }
 
   @media (max-width: 560px) {
-    .crest { width: 64px; top: 12px; }
-    @keyframes crest-travel {
-      0%   { left: 12px;             transform: scale(0.85) rotate(-8deg); opacity: 0; }
-      12%  { opacity: 1; }
-      100% { left: calc(100% - 78px); transform: scale(1) rotate(0deg);    opacity: 1; }
-    }
+    .crest { width: 64px; top: -10px; }
   }
 
   /* ================= HERO ================= */
 
   .hero {
     position: relative;
-    padding: 110px 0 90px;
+    padding: 175px 0 90px;
     overflow: hidden;
   }
 
@@ -130,13 +118,22 @@
     to { stroke-dashoffset: -14; }
   }
 
-  .dot-start, .dot-end {
+  .route-dot {
     fill: var(--sky-deep);
     transform-box: fill-box;
     transform-origin: center;
     animation: pulse 2.4s ease-in-out infinite;
   }
-  .dot-end { animation-delay: 1.2s; }
+
+  .route-label {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 13px;
+    font-weight: 700;
+    font-style: italic;
+    fill: var(--brown);
+    text-anchor: middle;
+    opacity: 0.9;
+  }
 
   @keyframes pulse {
     0%, 100% { opacity: 0.45; transform: scale(1); }
@@ -145,21 +142,25 @@
 
   .plane {
     opacity: 0;
-    animation: fly-loop 4.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    animation: fly-loop 10s cubic-bezier(0.45, 0, 0.55, 1) infinite;
     animation-delay: 0.6s;
     font-size: 22px;
     font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
   }
 
   @keyframes fly-loop {
-    0%   { transform: translate(8px, 92px); opacity: 0; }
-    6%   { opacity: 1; }
-    20%  { transform: translate(144px, 52px); }
-    40%  { transform: translate(295px, 30px); }
-    60%  { transform: translate(453px, 23px); }
-    80%  { transform: translate(611px, 29px); }
-    94%  { opacity: 1; }
-    100% { transform: translate(762px, 46px); opacity: 0; }
+    0%   { transform: translate(45px, 95px);  opacity: 0; }
+    4%   { opacity: 1; }
+    10%  { transform: translate(45px, 95px); }
+    28%  { transform: translate(225px, 30px); }
+    34%  { transform: translate(225px, 30px); }
+    50%  { transform: translate(400px, 85px); }
+    56%  { transform: translate(400px, 85px); }
+    72%  { transform: translate(575px, 25px); }
+    78%  { transform: translate(575px, 25px); }
+    94%  { transform: translate(725px, 65px); }
+    97%  { opacity: 1; }
+    100% { transform: translate(725px, 65px); opacity: 0; }
   }
 
   .hero-inner {
@@ -462,12 +463,11 @@
     }
     .hero-inner, .year-block, .stamp { opacity: 1 !important; transform: none !important; }
     .albums li { opacity: 1 !important; transform: none !important; }
-    .plane { opacity: 1 !important; transform: translate(400px, 30px) !important; }
-    .crest { left: calc(100% - 112px) !important; transform: none !important; opacity: 1 !important; }
+    .plane { opacity: 1 !important; transform: translate(400px, 55px) !important; }
   }
 
   @media (max-width: 560px) {
-    .hero { padding: 78px 0 56px; }
+    .hero { padding: 135px 0 56px; }
     .wrap { padding: 0 20px; }
     .year-num { font-size: 32px; }
     .year-flags { font-size: 28px; }
@@ -487,9 +487,23 @@
     <div class="hero-watermark" aria-hidden="true">80</div>
 
     <svg class="route-svg" viewBox="0 0 770 130" preserveAspectRatio="none" aria-hidden="true">
-      <path class="route-path" d="M 8 92 C 220 10, 520 10, 762 46" />
-      <circle class="dot-start" cx="8" cy="92" r="4" />
-      <circle class="dot-end" cx="762" cy="46" r="4" />
+      <path class="route-path" d="M 45 95 C 110 40, 160 30, 225 30 C 290 30, 340 85, 400 85 C 460 85, 520 25, 575 25 C 630 25, 685 65, 725 65" />
+
+      <circle class="route-dot" cx="45" cy="95" r="4" style="animation-delay:0s" />
+      <text class="route-label" x="45" y="115">Sri Lanka</text>
+
+      <circle class="route-dot" cx="225" cy="30" r="4" style="animation-delay:0.3s" />
+      <text class="route-label" x="225" y="50">UK</text>
+
+      <circle class="route-dot" cx="400" cy="85" r="4" style="animation-delay:0.6s" />
+      <text class="route-label" x="400" y="105">Australia</text>
+
+      <circle class="route-dot" cx="575" cy="25" r="4" style="animation-delay:0.9s" />
+      <text class="route-label" x="575" y="45">USA</text>
+
+      <circle class="route-dot" cx="725" cy="65" r="4" style="animation-delay:1.2s" />
+      <text class="route-label" x="725" y="85">Canada</text>
+
       <text class="plane" x="0" y="18">✈️</text>
     </svg>
 
@@ -514,12 +528,11 @@
         <span class="year-count">1 album</span>
       </div>
       <ul class="albums">
-        <li><a href="https://drive.google.com/drive/u/5/folders/1u3uBmixH36Bj_N4zo7wahsPHSxPvzTmY" target="_blank" rel="noopener">
+        <li><a href="https://photos.app.goo.gl/5JdFeu7xzA87R4sF6" target="_blank" rel="noopener">
           <span class="ticket-main"><span class="album-label">🇱🇰 Sri Lanka Trip</span></span>
-          <span class="ticket-stub"><svg viewBox="0 0 24 24" fill="none"><path d="M2 16.5l19-9-9 19-2.5-8-7.5-2z" stroke-width="1.4" stroke-linejoin="round"/></svg><span class="stub-label">Add</span></span>
+          <span class="ticket-stub"><svg viewBox="0 0 24 24" fill="none"><path d="M2 16.5l19-9-9 19-2.5-8-7.5-2z" stroke-width="1.4" stroke-linejoin="round"/></svg><span class="stub-label">View</span></span>
         </a></li>
       </ul>
-      <p class="cta-line"><a href="https://drive.google.com/drive/u/5/folders/1u3uBmixH36Bj_N4zo7wahsPHSxPvzTmY" target="_blank" rel="noopener">Click here to add your pictures from 2023 Sri Lanka Trip</a></p>
     </section>
 
     <section class="year-block" data-year="2024">
