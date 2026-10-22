@@ -164,7 +164,7 @@
 
   .hero {
     position: relative;
-    padding: 190px 0 90px;
+    padding: 240px 0 90px;
     overflow: hidden;
   }
 
@@ -174,20 +174,28 @@
     right: 0;
     top: 38px;
     height: 130px;
+    padding: 0 12px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    text-align: center;
     font-family: 'Fraunces', serif;
     font-weight: 700;
-    font-size: clamp(50px, 18vw, 170px);
-    line-height: 1;
+    font-size: clamp(26px, 9vw, 74px);
+    line-height: 1.02;
     color: var(--brown-soft);
-    opacity: 0.14;
-    letter-spacing: -0.02em;
+    opacity: 0.16;
+    letter-spacing: -0.01em;
     user-select: none;
     z-index: 0;
     pointer-events: none;
     animation: breathe 5s ease-in-out infinite;
+  }
+
+  .hero-watermark span {
+    display: block;
+    white-space: nowrap;
   }
 
   @keyframes breathe {
@@ -240,12 +248,69 @@
   .route-label {
     position: absolute;
     transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 5px;
     font-family: 'Source Serif 4', Georgia, serif;
     font-size: 15px;
     font-weight: 700;
     font-style: italic;
     color: var(--brown);
     white-space: nowrap;
+    opacity: 0;
+    animation-duration: 12s;
+    animation-delay: 0.6s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-out;
+  }
+
+  .route-label.l1 { animation-name: show-l1; }
+  .route-label.l2 { animation-name: show-l2; }
+  .route-label.l3 { animation-name: show-l3; }
+  .route-label.l4 { animation-name: show-l4; }
+  .route-label.l5 { animation-name: show-l5; }
+
+  .route-flag {
+    font-style: normal;
+    font-size: 22px;
+    line-height: 1;
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+    filter: drop-shadow(0 2px 3px rgba(74, 44, 24, 0.35));
+  }
+
+  @keyframes show-l1 {
+    0%, 5% { opacity: 0; translate: 0 8px; }
+    8% { opacity: 1; translate: 0 0; }
+    98% { opacity: 1; translate: 0 0; }
+    100% { opacity: 0; translate: 0 0; }
+  }
+
+  @keyframes show-l2 {
+    0%, 28% { opacity: 0; translate: 0 8px; }
+    31% { opacity: 1; translate: 0 0; }
+    98% { opacity: 1; translate: 0 0; }
+    100% { opacity: 0; translate: 0 0; }
+  }
+
+  @keyframes show-l3 {
+    0%, 50% { opacity: 0; translate: 0 8px; }
+    53% { opacity: 1; translate: 0 0; }
+    98% { opacity: 1; translate: 0 0; }
+    100% { opacity: 0; translate: 0 0; }
+  }
+
+  @keyframes show-l4 {
+    0%, 72% { opacity: 0; translate: 0 8px; }
+    75% { opacity: 1; translate: 0 0; }
+    98% { opacity: 1; translate: 0 0; }
+    100% { opacity: 0; translate: 0 0; }
+  }
+
+  @keyframes show-l5 {
+    0%, 88% { opacity: 0; translate: 0 8px; }
+    91% { opacity: 1; translate: 0 0; }
+    98% { opacity: 1; translate: 0 0; }
+    100% { opacity: 0; translate: 0 0; }
   }
 
   @keyframes pulse {
@@ -255,7 +320,7 @@
 
   .plane {
     opacity: 0;
-    animation: fly-loop 10s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+    animation: fly-loop 12s cubic-bezier(0.45, 0, 0.55, 1) infinite;
     animation-delay: 0.6s;
     font-size: 22px;
     font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
@@ -264,15 +329,16 @@
   @keyframes fly-loop {
     0%   { transform: translate(45px, 95px);  opacity: 0; }
     4%   { opacity: 1; }
-    10%  { transform: translate(45px, 95px); }
-    28%  { transform: translate(225px, 30px); }
-    34%  { transform: translate(225px, 30px); }
-    50%  { transform: translate(400px, 85px); }
-    56%  { transform: translate(400px, 85px); }
-    72%  { transform: translate(575px, 25px); }
-    78%  { transform: translate(575px, 25px); }
-    94%  { transform: translate(725px, 65px); }
-    97%  { opacity: 1; }
+    8%   { transform: translate(45px, 95px); }
+    14%  { transform: translate(45px, 95px); }
+    30%  { transform: translate(225px, 30px); }
+    36%  { transform: translate(225px, 30px); }
+    52%  { transform: translate(400px, 85px); }
+    58%  { transform: translate(400px, 85px); }
+    74%  { transform: translate(575px, 25px); }
+    80%  { transform: translate(575px, 25px); }
+    90%  { transform: translate(725px, 65px); }
+    97%  { transform: translate(725px, 65px); opacity: 1; }
     100% { transform: translate(725px, 65px); opacity: 0; }
   }
 
@@ -576,16 +642,19 @@
     }
     .hero-inner, .year-block, .stamp { opacity: 1 !important; transform: none !important; }
     .albums li { opacity: 1 !important; transform: none !important; }
+    .route-label { opacity: 1 !important; }
     .plane { opacity: 1 !important; transform: translate(400px, 55px) !important; }
   }
 
   @media (max-width: 560px) {
-    .hero { padding: 150px 0 56px; }
+    .hero { padding: 195px 0 56px; }
     .wrap { padding: 0 16px; }
     .kicker { font-size: clamp(11px, 3.3vw, 17px); white-space: nowrap; }
     h1 { font-size: clamp(18px, 4.6vw, 30px); }
     h1 span { white-space: nowrap; }
-    .hero-watermark { top: 20px; height: 100px; font-size: clamp(40px, 22vw, 120px); }
+    .hero-watermark { top: 20px; height: 100px; font-size: clamp(26px, 9.2vw, 56px); }
+    .route-label { font-size: 12.5px; gap: 3px; }
+    .route-flag { font-size: 17px; }
     .year-num { font-size: 32px; }
     .year-flags { font-size: 28px; }
     .stamp { width: 52px; height: 52px; }
@@ -645,7 +714,10 @@
   </nav>
 
   <header class="hero">
-    <div class="hero-watermark" aria-hidden="true">1980</div>
+    <div class="hero-watermark" aria-label="JCC Young Boys of the 1980 Batch">
+      <span aria-hidden="true">JCC Young Boys</span>
+      <span aria-hidden="true">of the 1980 Batch</span>
+    </div>
 
     <svg class="route-svg" viewBox="0 0 770 130" preserveAspectRatio="none" aria-hidden="true">
       <path class="route-path" d="M 45 95 C 110 40, 160 30, 225 30 C 290 30, 340 85, 400 85 C 460 85, 520 25, 575 25 C 630 25, 685 65, 725 65" />
@@ -660,11 +732,11 @@
     </svg>
 
     <div class="route-labels" aria-hidden="true">
-      <span class="route-label" style="left:5.8%; top:88.5%; transform:translateX(0)">Sri Lanka</span>
-      <span class="route-label" style="left:29.2%; top:38.5%">UK</span>
-      <span class="route-label" style="left:52%; top:80.8%">Australia</span>
-      <span class="route-label" style="left:74.7%; top:34.6%">USA</span>
-      <span class="route-label" style="left:94.2%; top:65.4%; transform:translateX(-100%)">Canada</span>
+      <span class="route-label l1" style="left:5.8%; top:88.5%; transform:translateX(0)"><span class="route-flag">🇱🇰</span>Sri Lanka</span>
+      <span class="route-label l2" style="left:29.2%; top:38.5%"><span class="route-flag">🇬🇧</span>UK</span>
+      <span class="route-label l3" style="left:52%; top:80.8%"><span class="route-flag">🇦🇺</span>Australia</span>
+      <span class="route-label l4" style="left:74.7%; top:34.6%"><span class="route-flag">🇺🇸</span>USA</span>
+      <span class="route-label l5" style="left:94.2%; top:65.4%; transform:translateX(-100%)"><span class="route-flag">🇨🇦</span>Canada</span>
     </div>
 
     <div class="wrap hero-inner">
