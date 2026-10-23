@@ -164,6 +164,7 @@
 
   .hero {
     position: relative;
+    margin-top: 28px;
     padding: 240px 0 90px;
     overflow: hidden;
   }
@@ -257,18 +258,26 @@
     font-style: italic;
     color: var(--brown);
     white-space: nowrap;
+  }
+
+  .route-name, .route-flag {
     opacity: 0;
     animation-duration: 12s;
     animation-delay: 0.6s;
     animation-iteration-count: infinite;
-    animation-timing-function: ease-out;
+    animation-timing-function: cubic-bezier(0.34, 1.4, 0.5, 1);
   }
 
-  .route-label.l1 { animation-name: show-l1; }
-  .route-label.l2 { animation-name: show-l2; }
-  .route-label.l3 { animation-name: show-l3; }
-  .route-label.l4 { animation-name: show-l4; }
-  .route-label.l5 { animation-name: show-l5; }
+  .route-label.l1 .route-name { animation-name: drop-l1; }
+  .route-label.l2 .route-name { animation-name: drop-l2; }
+  .route-label.l3 .route-name { animation-name: drop-l3; }
+  .route-label.l4 .route-name { animation-name: drop-l4; }
+  .route-label.l5 .route-name { animation-name: drop-l5; }
+  .route-label.l1 .route-flag { animation-name: rise-l1; }
+  .route-label.l2 .route-flag { animation-name: rise-l2; }
+  .route-label.l3 .route-flag { animation-name: rise-l3; }
+  .route-label.l4 .route-flag { animation-name: rise-l4; }
+  .route-label.l5 .route-flag { animation-name: rise-l5; }
 
   .route-flag {
     font-style: normal;
@@ -278,37 +287,72 @@
     filter: drop-shadow(0 2px 3px rgba(74, 44, 24, 0.35));
   }
 
-  @keyframes show-l1 {
-    0%, 5% { opacity: 0; translate: 0 8px; }
-    8% { opacity: 1; translate: 0 0; }
+  @keyframes drop-l1 {
+    0%, 5% { opacity: 0; translate: 0 -34px; }
+    10% { opacity: 1; translate: 0 0; }
     98% { opacity: 1; translate: 0 0; }
     100% { opacity: 0; translate: 0 0; }
   }
 
-  @keyframes show-l2 {
-    0%, 28% { opacity: 0; translate: 0 8px; }
-    31% { opacity: 1; translate: 0 0; }
+  @keyframes rise-l1 {
+    0%, 5% { opacity: 0; translate: 0 34px; }
+    10% { opacity: 1; translate: 0 0; }
     98% { opacity: 1; translate: 0 0; }
     100% { opacity: 0; translate: 0 0; }
   }
 
-  @keyframes show-l3 {
-    0%, 50% { opacity: 0; translate: 0 8px; }
-    53% { opacity: 1; translate: 0 0; }
+  @keyframes drop-l2 {
+    0%, 28% { opacity: 0; translate: 0 -34px; }
+    33% { opacity: 1; translate: 0 0; }
     98% { opacity: 1; translate: 0 0; }
     100% { opacity: 0; translate: 0 0; }
   }
 
-  @keyframes show-l4 {
-    0%, 72% { opacity: 0; translate: 0 8px; }
-    75% { opacity: 1; translate: 0 0; }
+  @keyframes rise-l2 {
+    0%, 28% { opacity: 0; translate: 0 34px; }
+    33% { opacity: 1; translate: 0 0; }
     98% { opacity: 1; translate: 0 0; }
     100% { opacity: 0; translate: 0 0; }
   }
 
-  @keyframes show-l5 {
-    0%, 88% { opacity: 0; translate: 0 8px; }
-    91% { opacity: 1; translate: 0 0; }
+  @keyframes drop-l3 {
+    0%, 50% { opacity: 0; translate: 0 -34px; }
+    55% { opacity: 1; translate: 0 0; }
+    98% { opacity: 1; translate: 0 0; }
+    100% { opacity: 0; translate: 0 0; }
+  }
+
+  @keyframes rise-l3 {
+    0%, 50% { opacity: 0; translate: 0 34px; }
+    55% { opacity: 1; translate: 0 0; }
+    98% { opacity: 1; translate: 0 0; }
+    100% { opacity: 0; translate: 0 0; }
+  }
+
+  @keyframes drop-l4 {
+    0%, 72% { opacity: 0; translate: 0 -34px; }
+    77% { opacity: 1; translate: 0 0; }
+    98% { opacity: 1; translate: 0 0; }
+    100% { opacity: 0; translate: 0 0; }
+  }
+
+  @keyframes rise-l4 {
+    0%, 72% { opacity: 0; translate: 0 34px; }
+    77% { opacity: 1; translate: 0 0; }
+    98% { opacity: 1; translate: 0 0; }
+    100% { opacity: 0; translate: 0 0; }
+  }
+
+  @keyframes drop-l5 {
+    0%, 88% { opacity: 0; translate: 0 -34px; }
+    93% { opacity: 1; translate: 0 0; }
+    98% { opacity: 1; translate: 0 0; }
+    100% { opacity: 0; translate: 0 0; }
+  }
+
+  @keyframes rise-l5 {
+    0%, 88% { opacity: 0; translate: 0 34px; }
+    93% { opacity: 1; translate: 0 0; }
     98% { opacity: 1; translate: 0 0; }
     100% { opacity: 0; translate: 0 0; }
   }
@@ -642,12 +686,12 @@
     }
     .hero-inner, .year-block, .stamp { opacity: 1 !important; transform: none !important; }
     .albums li { opacity: 1 !important; transform: none !important; }
-    .route-label { opacity: 1 !important; }
+    .route-name, .route-flag { opacity: 1 !important; }
     .plane { opacity: 1 !important; transform: translate(400px, 55px) !important; }
   }
 
   @media (max-width: 560px) {
-    .hero { padding: 195px 0 56px; }
+    .hero { margin-top: 28px; padding: 195px 0 56px; }
     .wrap { padding: 0 16px; }
     .kicker { font-size: clamp(11px, 3.3vw, 17px); white-space: nowrap; }
     h1 { font-size: clamp(18px, 4.6vw, 30px); }
@@ -732,11 +776,11 @@
     </svg>
 
     <div class="route-labels" aria-hidden="true">
-      <span class="route-label l1" style="left:5.8%; top:88.5%; transform:translateX(0)"><span class="route-flag">🇱🇰</span>Sri Lanka</span>
-      <span class="route-label l2" style="left:29.2%; top:38.5%"><span class="route-flag">🇬🇧</span>UK</span>
-      <span class="route-label l3" style="left:52%; top:80.8%"><span class="route-flag">🇦🇺</span>Australia</span>
-      <span class="route-label l4" style="left:74.7%; top:34.6%"><span class="route-flag">🇺🇸</span>USA</span>
-      <span class="route-label l5" style="left:94.2%; top:65.4%; transform:translateX(-100%)"><span class="route-flag">🇨🇦</span>Canada</span>
+      <span class="route-label l1" style="left:5.8%; top:88.5%; transform:translateX(0)"><span class="route-flag">🇱🇰</span><span class="route-name">Sri Lanka</span></span>
+      <span class="route-label l2" style="left:29.2%; top:38.5%"><span class="route-flag">🇬🇧</span><span class="route-name">UK</span></span>
+      <span class="route-label l3" style="left:52%; top:80.8%"><span class="route-flag">🇦🇺</span><span class="route-name">Australia</span></span>
+      <span class="route-label l4" style="left:74.7%; top:34.6%"><span class="route-flag">🇺🇸</span><span class="route-name">USA</span></span>
+      <span class="route-label l5" style="left:94.2%; top:65.4%; transform:translateX(-100%)"><span class="route-flag">🇨🇦</span><span class="route-name">Canada</span></span>
     </div>
 
     <div class="wrap hero-inner">
