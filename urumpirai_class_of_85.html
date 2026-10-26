@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Urumpirai Class of 85</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600&family=Noto+Sans+Tamil:wght@500;600&display=swap">
+<style>
+:root {
+  color-scheme: light;
+  --bg: #eef2ee;
+  --surface: #f9fbf8;
+  --fg: #10211c;
+  --muted: #4d6360;
+  --line: #c6d3cd;
+  --sea: #0d6b6b;
+  --sea-ink: #ffffff;
+  --sun: #c98a12;
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Hanken Grotesk", "Segoe UI", system-ui, sans-serif;
+  --font-tamil: "Noto Sans Tamil", "Latha", "Nirmala UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b1816; --surface: #12241f; --fg: #e6efea; --muted: #9bb2ac;
+    --line: #28403a; --sea: #4fc4bd; --sea-ink: #062321; --sun: #e8b44a;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.55;
+  padding-block: 40px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 720px; margin: 0 auto; display: grid; gap: 48px; }
+a:focus-visible { outline: 3px solid var(--sun); outline-offset: 3px; }
+
+header { display: grid; gap: 14px; min-width: 0; }
+.tamil {
+  font-family: var(--font-tamil);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--sea);
+  letter-spacing: 0.02em;
+}
+.mark {
+  display: flex; align-items: baseline; gap: 0.12em; flex-wrap: wrap;
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+}
+.mark .num { font-size: clamp(5.5rem, 26vw, 11rem); color: var(--fg); }
+.mark .word { font-size: clamp(1.6rem, 6vw, 2.4rem); font-weight: 700; color: var(--muted); letter-spacing: -0.01em; }
+.mark .word b { display: block; color: var(--fg); font-weight: 800; }
+.intro { max-width: 34em; color: var(--muted); margin: 0; }
+
+.rail { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
+.rail li {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  gap: 0 18px;
+  position: relative;
+  padding-bottom: 28px;
+}
+.rail li:last-child { padding-bottom: 0; }
+.rail li::before {
+  content: ""; position: absolute; left: calc(4.5rem + 9px - 1px); top: 14px; bottom: -2px;
+  width: 2px; background: var(--line);
+}
+.rail li:last-child::before { display: none; }
+.rail .yr {
+  font-family: var(--font-display); font-weight: 800; font-size: 1.6rem;
+  letter-spacing: -0.02em; line-height: 1.1; padding-top: 2px; font-variant-numeric: tabular-nums;
+}
+.rail .dot {
+  position: absolute; left: calc(4.5rem + 9px - 7px); top: 9px;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--sun); border: 3px solid var(--bg);
+  box-shadow: 0 0 0 2px var(--sun);
+}
+.album {
+  grid-column: 2;
+  display: grid; gap: 6px;
+  min-width: 0;
+  padding: 18px 20px 20px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  text-decoration: none; color: inherit;
+  transition: border-color .15s, transform .15s;
+}
+.album:hover { border-color: var(--sea); transform: translateY(-2px); }
+.album h2 {
+  margin: 0; font-family: var(--font-display); font-weight: 700;
+  font-size: 1.35rem; line-height: 1.2; letter-spacing: -0.01em; text-wrap: balance;
+}
+.album .where { color: var(--muted); font-size: 0.95rem; }
+.album .go {
+  margin-top: 10px; justify-self: start;
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--sea); color: var(--sea-ink);
+  font-weight: 600; font-size: 0.95rem;
+  padding: 9px 16px; border-radius: 4px;
+}
+.gap-note {
+  font-family: var(--font-display); font-weight: 500; color: var(--muted);
+  margin: 20px 0 0; font-size: 0.95rem;
+}
+footer { color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--line); padding-top: 18px; }
+
+@media (max-width: 480px) {
+  .rail li { grid-template-columns: 1fr; padding-left: 28px; }
+  .rail li::before { left: 6px; top: 12px; }
+  .rail .dot { left: 0; top: 9px; }
+  .rail .yr { grid-column: 1; }
+  .album { grid-column: 1; margin-top: 8px; }
+}
+@media (prefers-reduced-motion: reduce) { .album { transition: none; } .album:hover { transform: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="tamil" lang="ta">உரும்பிராய்</span>
+    <h1 class="mark" aria-label="Urumpirai Class of 85" style="margin:0">
+      <span class="num" aria-hidden="true">85</span>
+      <span class="word" aria-hidden="true">Urumpirai<b>Class of 85</b></span>
+    </h1>
+    <p class="intro">Photos from the times we have come together since leaving school. Pick an album to open it in Google Photos.</p>
+  </header>
+
+  <main>
+    <ol class="rail">
+      <li>
+        <span class="yr">2026</span><span class="dot" aria-hidden="true"></span>
+        <a class="album" href="https://photos.app.goo.gl/QJqVzwVq1gEchDbU8" target="_blank" rel="noopener noreferrer">
+          <h2>Urumpirai Class of 85 Reunion 2026</h2>
+          <span class="where">Reunion photo album</span>
+          <span class="go">View photos <span aria-hidden="true">↗</span></span>
+        </a>
+      </li>
+      <li>
+        <span class="yr">2016</span><span class="dot" aria-hidden="true"></span>
+        <a class="album" href="https://photos.app.goo.gl/KZju1BMtfEV4FPqP8" target="_blank" rel="noopener noreferrer">
+          <h2>2016 Urumpirai 1985 Batch Get-together Canada</h2>
+          <span class="where">Canada get-together photo album</span>
+          <span class="go">View photos <span aria-hidden="true">↗</span></span>
+        </a>
+      </li>
+    </ol>
+    <p class="gap-note">Ten years between the two gatherings.</p>
+  </main>
+
+  <footer>Urumpirai Class of 85</footer>
+</div>
+</body>
+</html>
