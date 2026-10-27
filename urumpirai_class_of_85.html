@@ -16,6 +16,7 @@
   --sea: #0d6b6b;
   --sea-ink: #ffffff;
   --sun: #c98a12;
+  --brown: #b58a5e;
   --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --font-body: "Hanken Grotesk", "Segoe UI", system-ui, sans-serif;
   --font-tamil: "Noto Sans Tamil", "Latha", "Nirmala UI", sans-serif;
@@ -23,7 +24,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #0b1816; --surface: #12241f; --fg: #e6efea; --muted: #9bb2ac;
-    --line: #28403a; --sea: #4fc4bd; --sea-ink: #062321; --sun: #e8b44a;
+    --line: #28403a; --sea: #4fc4bd; --sea-ink: #062321; --sun: #e8b44a; --brown: #cfa87c;
     color-scheme: dark;
   }
 }
@@ -58,7 +59,7 @@ header { display: grid; gap: 14px; min-width: 0; }
   line-height: 0.9;
   letter-spacing: -0.03em;
 }
-.mark .num { font-size: clamp(5.5rem, 26vw, 11rem); color: var(--fg); }
+.mark .num { font-size: clamp(4rem, 20vw, 8.5rem); color: var(--brown); }
 .mark .word { font-size: clamp(1.6rem, 6vw, 2.4rem); font-weight: 700; color: var(--muted); letter-spacing: -0.01em; }
 .mark .word b { display: block; color: var(--fg); font-weight: 800; }
 .intro { max-width: 34em; color: var(--muted); margin: 0; }
@@ -147,9 +148,8 @@ footer { color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--lin
 </div>
 <div class="wrap">
   <header>
-    <span class="tamil" lang="ta">உரும்பிராய்</span>
     <h1 class="mark" aria-label="Urumpirai Class of 85" style="margin:0">
-      <span class="num" aria-hidden="true">85</span>
+      <span class="num" aria-hidden="true">1985</span>
       <span class="word" aria-hidden="true">Urumpirai<b>Class of 85</b></span>
     </h1>
     <p class="intro">Photos from the times we have come together since leaving school. Pick an album to open it in Google Photos.</p>
