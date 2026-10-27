@@ -117,6 +117,20 @@ header { display: grid; gap: 14px; min-width: 0; }
 }
 footer { color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--line); padding-top: 18px; }
 
+.drift { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.drift img {
+  --s: clamp(110px, 20vw, 200px);
+  position: absolute; left: 0; top: 0;
+  width: var(--s); height: var(--s); object-fit: contain;
+  opacity: 0.9;
+  animation: driftX 27s ease-in-out infinite alternate, driftY 19s ease-in-out infinite alternate;
+}
+@keyframes driftX { from { left: 0; } to { left: calc(100% - var(--s)); } }
+@keyframes driftY { from { top: 0; } to { top: calc(100% - var(--s)); } }
+.wrap { position: relative; z-index: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .drift img { animation: none; left: auto; right: 16px; top: 16px; }
+}
 @media (max-width: 480px) {
   .rail li { grid-template-columns: 1fr; padding-left: 28px; }
   .rail li::before { left: 6px; top: 12px; }
@@ -128,11 +142,14 @@ footer { color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--lin
 </style>
 </head>
 <body>
+<div class="drift" aria-hidden="true">
+  <img src="https://media.bighaat.com/kvplus/articles/526ebdff-9a68-4e0e-932f-90158b4454a7.png?w=1920&amp;q=80&amp;format=webp&amp;compress=true" alt="" onerror="this.parentNode.hidden=true">
+</div>
 <div class="wrap">
   <header>
     <span class="tamil" lang="ta">உரும்பிராய்</span>
     <h1 class="mark" aria-label="Urumpirai Class of 85" style="margin:0">
-      <span class="num" aria-hidden="true">1985</span>
+      <span class="num" aria-hidden="true">85</span>
       <span class="word" aria-hidden="true">Urumpirai<b>Class of 85</b></span>
     </h1>
     <p class="intro">Photos from the times we have come together since leaving school. Pick an album to open it in Google Photos.</p>
@@ -151,7 +168,7 @@ footer { color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--lin
       <li>
         <span class="yr">2016</span><span class="dot" aria-hidden="true"></span>
         <a class="album" href="https://photos.app.goo.gl/KZju1BMtfEV4FPqP8" target="_blank" rel="noopener noreferrer">
-          <h2>Urumpirai Class of 85 Reunion 2016</h2>
+          <h2>2016 Urumpirai 1985 Batch Get-together Canada</h2>
           <span class="where">Canada get-together photo album</span>
           <span class="go">View photos <span aria-hidden="true">↗</span></span>
         </a>
