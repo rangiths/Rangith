@@ -1438,20 +1438,39 @@
       var addrEl = document.getElementById('contactAddr');
       var copyBtn = document.getElementById('contactCopy');
       var addr = ['rangiths', 'hotmail.com'].join('@');
-      var timer = null;
+      var timer = null, active = false, blurred = false, left = false;
 
-      function cancel() { if (timer) { clearTimeout(timer); timer = null; } }
       function show() {
+        active = false;
+        if (timer) { clearTimeout(timer); timer = null; }
         addrEl.textContent = addr;
         reveal.hidden = false;
       }
 
+      // The page was fully switched away (typical on phones when the email app
+      // opens): treat it as success and keep the address hidden.
+      document.addEventListener('visibilitychange', function () {
+        if (active && document.visibilityState === 'hidden') {
+          left = true;
+          active = false;
+          if (timer) { clearTimeout(timer); timer = null; }
+        }
+      });
+      window.addEventListener('pagehide', function () { left = true; });
+
+      // On computers a "no app found / open with..." dialog only blurs the window.
+      // When the visitor comes back, show the address.
+      window.addEventListener('blur', function () { if (active) blurred = true; });
+      window.addEventListener('focus', function () { if (active && blurred && !left) show(); });
+
       btn.addEventListener('click', function () {
-        cancel();
-        window.addEventListener('blur', cancel, { once: true });
-        document.addEventListener('visibilitychange', cancel, { once: true });
-        window.addEventListener('pagehide', cancel, { once: true });
-        timer = setTimeout(function () { timer = null; show(); }, 1500);
+        active = true; blurred = false; left = false;
+        if (timer) clearTimeout(timer);
+        timer = setTimeout(function () {
+          timer = null;
+          // Still here and nothing took focus: no email app responded.
+          if (active && !blurred && !left) show();
+        }, 1500);
         window.location.href = 'mailto:' + addr;
       });
 
