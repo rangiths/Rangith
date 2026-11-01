@@ -901,6 +901,99 @@
     to   { transform: rotate(3deg); }
   }
 
+  .contact {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin: 0 0 34px;
+    padding: 16px 20px;
+    background: var(--card);
+    border: 1px solid var(--sky-line);
+    border-radius: 12px;
+  }
+
+  .contact-icon {
+    flex: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--brown);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .contact-icon svg { width: 20px; height: 20px; }
+  .contact-icon svg path, .contact-icon svg rect { stroke: var(--card); }
+
+  .contact-text { display: flex; flex-direction: column; min-width: 0; }
+
+  .contact-label {
+    font-size: 13px;
+    font-style: italic;
+    color: var(--ink-soft);
+  }
+
+  .contact-btn, .contact-copy {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--card);
+    background: var(--brown);
+    border: 0;
+    border-radius: 999px;
+    padding: 9px 22px;
+    margin-top: 6px;
+    cursor: pointer;
+    align-self: flex-start;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .contact-btn:hover, .contact-btn:focus-visible,
+  .contact-copy:hover, .contact-copy:focus-visible {
+    background: var(--brown-deep);
+    transform: translateY(-1px);
+  }
+
+  .contact-reveal {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    margin-top: 12px;
+  }
+
+  .contact-reveal[hidden] { display: none; }
+
+  .contact-note {
+    font-size: 13px;
+    font-style: italic;
+    color: var(--ink-soft);
+  }
+
+  .contact-addr {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--brown-deep);
+    overflow-wrap: anywhere;
+    user-select: all;
+  }
+
+  .contact-copy {
+    font-size: 13px;
+    padding: 5px 14px;
+    margin-top: 2px;
+    background: transparent;
+    color: var(--brown-deep);
+    border: 1px solid var(--brown-soft);
+  }
+
+  .contact-copy:hover, .contact-copy:focus-visible { background: var(--sky); }
+
   .motto {
     font-family: 'Fraunces', serif;
     font-style: italic;
@@ -1198,6 +1291,18 @@
     <svg class="leaf" viewBox="0 0 100 100" aria-hidden="true">
       <path d="M95 95C60 95 15 70 10 20C55 15 95 55 95 95Z"/>
     </svg>
+    <div class="contact">
+      <span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke-width="1.6"/><path d="M3.5 6.5l8.5 7 8.5-7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="contact-text">
+        <span class="contact-label">Questions or photos to share?</span>
+        <button type="button" class="contact-btn" id="contactBtn">Contact us</button>
+        <span class="contact-reveal" id="contactReveal" hidden>
+          <span class="contact-note">No email app opened? Write to us at:</span>
+          <span class="contact-addr" id="contactAddr"></span>
+          <button type="button" class="contact-copy" id="contactCopy">Copy address</button>
+        </span>
+      </span>
+    </div>
     <p class="motto">In gloriam Dei optimi maximi</p>
     <p class="motto-translation">Unto the glory of God, the best and the highest — the motto of Jaffna Central College.</p>
     <p class="slogan">Central's flag must never be lowered.</p>
@@ -1322,6 +1427,47 @@
     window.addEventListener('load', placeCrestEmoji);
     window.addEventListener('resize', placeCrestEmoji);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeCrestEmoji);
+  </script>
+
+<script>
+    // Contact button: tries to open the visitor's email app. The address is not
+    // written in the page; it is only built and shown if no email app opens.
+    (function () {
+      var btn = document.getElementById('contactBtn');
+      var reveal = document.getElementById('contactReveal');
+      var addrEl = document.getElementById('contactAddr');
+      var copyBtn = document.getElementById('contactCopy');
+      var addr = ['rangiths', 'hotmail.com'].join('@');
+      var timer = null;
+
+      function cancel() { if (timer) { clearTimeout(timer); timer = null; } }
+      function show() {
+        addrEl.textContent = addr;
+        reveal.hidden = false;
+      }
+
+      btn.addEventListener('click', function () {
+        cancel();
+        window.addEventListener('blur', cancel, { once: true });
+        document.addEventListener('visibilitychange', cancel, { once: true });
+        window.addEventListener('pagehide', cancel, { once: true });
+        timer = setTimeout(function () { timer = null; show(); }, 1500);
+        window.location.href = 'mailto:' + addr;
+      });
+
+      copyBtn.addEventListener('click', function () {
+        function done() { copyBtn.textContent = 'Copied'; setTimeout(function () { copyBtn.textContent = 'Copy address'; }, 1800); }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(addr).then(done, function () {
+            var r = document.createRange(); r.selectNodeContents(addrEl);
+            var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+          });
+        } else {
+          var r = document.createRange(); r.selectNodeContents(addrEl);
+          var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+        }
+      });
+    })();
   </script>
 
 </body>
