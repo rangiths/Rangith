@@ -126,6 +126,16 @@
     stroke-linejoin: round;
   }
 
+  img.emoji {
+    display: inline-block;
+    width: 1.15em;
+    height: 1.15em;
+    vertical-align: -0.2em;
+    margin: 0 0.06em;
+  }
+
+  .crest-emoji img.emoji, .route-flag img.emoji { vertical-align: top; margin: 0; }
+
   .crest-tag svg {
     position: absolute;
     left: 0;
@@ -1267,6 +1277,45 @@
         em.style.transform = 'translate(-50%, -50%) rotate(' + ang + 'deg)';
       });
     }
+    // Swap emoji for picture icons (Twemoji) so every flag/icon looks the same on
+    // every phone, tablet and computer. If a picture can't load, the plain emoji returns.
+    (function () {
+      var BASE = 'https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/';
+      var RE = /(?:\uD83C[\uDDE6-\uDDFF]){2}|(?:[\u2600-\u27BF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|\uD83E[\uDC00-\uDFFF])\uFE0F?/g;
+      function code(str) {
+        var out = [], i = 0;
+        while (i < str.length) {
+          var cp = str.codePointAt(i);
+          i += cp > 0xFFFF ? 2 : 1;
+          if (cp !== 0xFE0F) out.push(cp.toString(16));
+        }
+        return out.join('-');
+      }
+      function convert(el) {
+        var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), nodes = [], n;
+        while ((n = walker.nextNode())) { RE.lastIndex = 0; if (RE.test(n.nodeValue)) nodes.push(n); }
+        nodes.forEach(function (node) {
+          var text = node.nodeValue, frag = document.createDocumentFragment(), last = 0, m;
+          RE.lastIndex = 0;
+          while ((m = RE.exec(text))) {
+            if (m.index > last) frag.appendChild(document.createTextNode(text.slice(last, m.index)));
+            var img = document.createElement('img');
+            img.className = 'emoji';
+            img.alt = m[0];
+            img.draggable = false;
+            img.src = BASE + code(m[0]) + '.svg';
+            img.onerror = function () { this.replaceWith(document.createTextNode(this.alt)); placeCrestEmoji(); };
+            img.onload = placeCrestEmoji;
+            frag.appendChild(img);
+            last = m.index + m[0].length;
+          }
+          if (last < text.length) frag.appendChild(document.createTextNode(text.slice(last)));
+          node.parentNode.replaceChild(frag, node);
+        });
+      }
+      document.querySelectorAll('.route-flag, .year-flags, .album-label, .year-nav-menu a, .crest-emoji').forEach(convert);
+    })();
+
     placeCrestEmoji();
     window.addEventListener('load', placeCrestEmoji);
     window.addEventListener('resize', placeCrestEmoji);
