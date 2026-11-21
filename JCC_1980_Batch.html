@@ -417,6 +417,13 @@
     transition: opacity 0.2s ease, transform 0.2s ease;
   }
 
+  /* While the Albums menu is open, the mouse pointer becomes a small plane (like the flying one). */
+  .year-nav.open .year-nav-menu,
+  .year-nav.open .year-nav-menu a,
+  .year-nav.open .year-nav-toggle {
+    cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><g transform='rotate(-45 12 12)'><path d='M12 1.5C13 1.5 13.6 3 13.6 5V9L22 14V16L13.6 13.6V18.5L16 20.3V22L12 21L8 22V20.3L10.4 18.5V13.6L2 16V14L10.4 9V5C10.4 3 11 1.5 12 1.5Z' fill='%23EEF3F7' stroke='%233C6E8F' stroke-width='1.1' stroke-linejoin='round'/><path d='M12 3.2V8' stroke='%233C6E8F' stroke-width='1.3' stroke-linecap='round'/></g></svg>") 5 5, pointer;
+  }
+
   .year-nav-group {
     font-size: 12px;
     font-weight: 700;
