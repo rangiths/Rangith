@@ -81,11 +81,28 @@
     border: 3px solid #000; border-radius: 50%; padding: 6px 18px;
     font-weight: 900; font-size: 28px; letter-spacing: -2px;
   }
+  .card .lead { font-size: 20px; }
+  .card p, .card h2, td { overflow-wrap: anywhere; }
   @media (max-width: 480px) {
-    .badge { flex-basis: 56px; height: 56px; font-size: 28px; }
-    .card h2 { font-size: 24px; }
-    .item h3 { font-size: 20px; } .item p { font-size: 18px; }
-    td { font-size: 17px; padding: 7px 10px; }
+    body { padding: 14px 10px 36px; }
+    .nav a { font-size: 14px; padding: 8px 14px; }
+    .banner { font-size: 22px; padding: 16px 12px; border-radius: 22px; }
+    .panel { padding: 10px; border-radius: 22px; gap: 10px; margin-top: 12px; }
+    .card { padding: 12px; gap: 10px; border-radius: 18px; }
+    .badge { flex: 0 0 44px; height: 44px; font-size: 22px; border-radius: 12px; }
+    .card h2 { font-size: 22px; margin-bottom: 2px; }
+    .card p, .card .lead { font-size: 16px; }
+    .card a { font-size: 15px; }
+    table { margin-top: 8px; }
+    td { font-size: 15px; padding: 6px 8px; }
+    .ccc { font-size: 20px; padding: 4px 12px; border-width: 2px; }
+    .item { gap: 12px; }
+    .icon { flex: 0 0 44px; height: 44px; font-size: 20px; }
+    .item h3 { font-size: 19px; } .item h3 .ok { font-size: 17px; }
+    .item p { font-size: 17px; }
+    .item p small { font-size: 14px; display: block; margin-left: 0; }
+    .hero { padding: 20px 14px; border-radius: 22px; }
+    .sub { font-size: 17px; }
   }
 </style>
 </head>
@@ -152,7 +169,7 @@
         <div class="body">
           <h2>Visa</h2>
           <p>Apply at: <a href="https://consular.mfa.gov.cn/VISA/" target="_blank" rel="noopener">https://consular.mfa.gov.cn/VISA/</a></p>
-          <p style="margin-top:6px;font-size:20px;">Regular processing time:</p>
+          <p class="lead" style="margin-top:6px;">Regular processing time:</p>
           <table>
             <tr><td>Canada</td><td>4 working days</td></tr>
             <tr><td>USA</td><td>4 working days</td></tr>
@@ -175,7 +192,7 @@
         <div class="badge">🧳</div>
         <div class="body">
           <h2>Luggage Allowance</h2>
-          <p style="font-size:20px;">20 kg + 5 kg for both domestic flights and trains</p>
+          <p class="lead">20 kg + 5 kg for both domestic flights and trains</p>
         </div>
       </div>
 
@@ -184,7 +201,7 @@
         <div class="body">
           <h2>Power Bank</h2>
           <div class="ccc-row">
-            <p style="font-size:20px;">Should have the CCC logo on it</p>
+            <p class="lead">Should have the CCC logo on it</p>
             <span class="ccc">CCC</span>
           </div>
         </div>
@@ -194,7 +211,7 @@
         <div class="badge">💊</div>
         <div class="body">
           <h2>Medicine</h2>
-          <p style="font-size:20px;">Check online and make sure what you are bringing is not restricted</p>
+          <p class="lead">Check online and make sure what you are bringing is not restricted</p>
         </div>
       </div>
 
