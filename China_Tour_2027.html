@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>China Tour 2027</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #e9e0cf;
+    color: #1a1a1a;
+    padding: 24px 16px 48px;
+    line-height: 1.4;
+  }
+  .page { max-width: 760px; margin: 0 auto; }
+  .nav { display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
+  .nav a {
+    text-decoration: none; background: #fff; color: #0a4fb8; font-weight: 700;
+    padding: 9px 18px; border-radius: 999px; border: 2px solid #0a64c8; font-size: 15px;
+  }
+  .nav a:hover { background: #0a64c8; color: #fff; }
+  section { margin-bottom: 44px; scroll-margin-top: 16px; }
+
+  /* ---------- Schedule section ---------- */
+  .hero {
+    background: linear-gradient(135deg, #8fd0ee, #4fb0e0 60%, #7cc6e8);
+    border-radius: 28px; padding: 28px 24px; text-align: center;
+    box-shadow: 0 4px 14px rgba(0,0,0,.12);
+  }
+  .hero h1 { font-size: clamp(36px, 8vw, 64px); color: #0a3a94; line-height: 1.05; }
+  .sub { text-align: center; color: #1f9ab0; font-weight: 700; font-size: 20px; margin: 18px 0 14px; }
+  .items { display: flex; flex-direction: column; gap: 14px; }
+  .item { display: flex; align-items: center; gap: 16px; }
+  .icon {
+    flex: 0 0 56px; height: 56px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; color: #fff; box-shadow: 0 2px 6px rgba(0,0,0,.2);
+  }
+  .c-green { background: #2fb457; } .c-blue { background: #1e63d6; } .c-teal { background: #1a9a8c; }
+  .item h3 { color: #0a2f7a; font-size: 24px; }
+  .item h3 .ok { color: #1c9b45; font-size: 22px; }
+  .item p { color: #333; font-size: 21px; font-weight: 600; }
+  .item p small { color: #666; font-size: 16px; font-weight: 400; margin-left: 6px; }
+  .footer-note {
+    margin-top: 24px; background: #b5e3dd; color: #0a2f7a; font-weight: 700;
+    border-radius: 24px; padding: 16px 20px; text-align: center; font-size: 19px;
+  }
+
+  /* ---------- Requirements section ---------- */
+  .banner {
+    background: #0a64c8; color: #fff; text-align: center; font-weight: 800;
+    font-size: clamp(26px, 5.5vw, 42px); padding: 20px 16px; border-radius: 28px;
+  }
+  .panel { background: rgba(255,255,255,.35); border-radius: 28px; padding: 20px; margin-top: 18px; display: flex; flex-direction: column; gap: 14px; }
+  .card {
+    display: flex; gap: 16px; background: #f1e4d5; border-radius: 22px; padding: 16px;
+    align-items: flex-start;
+  }
+  .badge {
+    flex: 0 0 72px; height: 72px; border-radius: 18px; background: #f6ece0;
+    display: flex; align-items: center; justify-content: center; font-size: 36px;
+  }
+  .card .body { flex: 1; min-width: 0; }
+  .card h2 { font-size: 30px; color: #1a1010; margin-bottom: 4px; }
+  .card p { font-size: 17px; color: #222; }
+  .card a { color: #0a4fb8; word-break: break-all; font-weight: 600; font-size: 18px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 10px; background: #f6ece0; border-radius: 14px; overflow: hidden; }
+  td { padding: 8px 14px; font-size: 20px; border-bottom: 2px solid #e8d9c8; }
+  tr:last-child td { border-bottom: none; }
+  td:first-child { width: 50%; border-right: 2px solid #e8d9c8; }
+  .ccc-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .ccc {
+    border: 3px solid #000; border-radius: 50%; padding: 6px 18px;
+    font-weight: 900; font-size: 28px; letter-spacing: -2px;
+  }
+  @media (max-width: 480px) {
+    .badge { flex-basis: 56px; height: 56px; font-size: 28px; }
+    .card h2 { font-size: 24px; }
+    .item h3 { font-size: 20px; } .item p { font-size: 18px; }
+    td { font-size: 17px; padding: 7px 10px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <nav class="nav">
+    <a href="#schedule">Travel Schedule</a>
+    <a href="#required">What is Required</a>
+  </nav>
+
+  <!-- ===================== TRAVEL SCHEDULE ===================== -->
+  <section id="schedule">
+    <div class="hero"><h1>✈️ China Tour 2027 🛂 📅</h1></div>
+    <div class="sub">Travel Schedule • Easy Overview</div>
+
+    <div class="items">
+      <div class="item"><div class="icon c-green">✔</div>
+        <div><h3>Passport Copies <span class="ok">- Received</span></h3></div></div>
+
+      <div class="item"><div class="icon c-blue">💵</div>
+        <div><h3>Deposit</h3><p>- on or before Nov 30, 2026</p></div></div>
+
+      <div class="item"><div class="icon c-blue">💳</div>
+        <div><h3>Final Payment</h3><p>- on or before Mar 1, 2027</p></div></div>
+
+      <div class="item"><div class="icon c-blue">📍</div>
+        <div><h3>Arrival Airport</h3><p>- PEK preferred, Beijing</p></div></div>
+
+      <div class="item"><div class="icon c-teal">📅</div>
+        <div><h3>Arrival Date</h3><p>- Apr 16, 2027 <small>(Hotel Included)</small></p></div></div>
+
+      <div class="item"><div class="icon c-green">✨</div>
+        <div><h3>First Day of Tour</h3><p>- Apr 17, 2027</p></div></div>
+
+      <div class="item"><div class="icon c-blue">🏁</div>
+        <div><h3>Last Day of Tour</h3><p>- Apr 28, 2027 <small>(Hotel Included)</small></p></div></div>
+
+      <div class="item"><div class="icon c-teal">📅</div>
+        <div><h3>Departure Date</h3><p>- Apr 29, 2027</p></div></div>
+
+      <div class="item"><div class="icon c-blue">🛫</div>
+        <div><h3>Departure Airport</h3><p>- PVG preferred, Shanghai</p></div></div>
+    </div>
+
+    <div class="footer-note">Safe travels! Have an amazing journey ✈️</div>
+  </section>
+
+  <!-- ===================== WHAT IS REQUIRED ===================== -->
+  <section id="required">
+    <div class="banner">What is Required - China Tour</div>
+
+    <div class="panel">
+
+      <div class="card">
+        <div class="badge">🛂</div>
+        <div class="body">
+          <h2>Visa</h2>
+          <p>Apply at: <a href="https://consular.mfa.gov.cn/VISA/" target="_blank" rel="noopener">https://consular.mfa.gov.cn/VISA/</a></p>
+          <p style="margin-top:6px;font-size:20px;">Regular processing time:</p>
+          <table>
+            <tr><td>Canada</td><td>4 working days</td></tr>
+            <tr><td>USA</td><td>4 working days</td></tr>
+            <tr><td>Australia</td><td>4 working days</td></tr>
+            <tr><td>UK</td><td>4 working days</td></tr>
+            <tr><td>Sri Lanka</td><td>3-4 working days</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="badge">🛡️</div>
+        <div class="body">
+          <h2>VPN</h2>
+          <p>Required to surf Western websites and apps if you are going to use public / hotel Wi-Fi.<br>Not required if you are going to use an eSIM.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="badge">🧳</div>
+        <div class="body">
+          <h2>Luggage Allowance</h2>
+          <p style="font-size:20px;">20 kg + 5 kg for both domestic flights and trains</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="badge">🔋</div>
+        <div class="body">
+          <h2>Power Bank</h2>
+          <div class="ccc-row">
+            <p style="font-size:20px;">Should have the CCC logo on it</p>
+            <span class="ccc">CCC</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="badge">💊</div>
+        <div class="body">
+          <h2>Medicine</h2>
+          <p style="font-size:20px;">Check online and make sure what you are bringing is not restricted</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="badge">👛</div>
+        <div class="body">
+          <h2>Payment in China</h2>
+          <p>Cash is not commonly used in China.<br>Download WeChat and Alipay Apps.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
