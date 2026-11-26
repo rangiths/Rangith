@@ -20,6 +20,13 @@
     padding: 9px 18px; border-radius: 999px; border: 2px solid #0a64c8; font-size: 15px;
   }
   .nav a:hover { background: #0a64c8; color: #fff; }
+  .home-row { text-align: center; margin: 0 0 16px; }
+  .home-row.bottom { margin: 8px 0 0; }
+  .home-row a {
+    display: inline-block; text-decoration: none; background: #0a64c8; color: #fff; font-weight: 700;
+    padding: 10px 24px; border-radius: 999px; font-size: 16px;
+  }
+  .home-row a:hover { background: #084c98; }
   section { margin-bottom: 44px; scroll-margin-top: 16px; }
 
   /* ---------- Schedule section ---------- */
@@ -85,6 +92,8 @@
 <body>
 <div class="page">
 
+  <div class="home-row"><a href="index.html" onclick="if (history.length > 1) { history.back(); return false; }">&larr; Home</a></div>
+
   <nav class="nav">
     <a href="#schedule">Travel Schedule</a>
     <a href="#required">What is Required</a>
@@ -92,7 +101,7 @@
 
   <!-- ===================== TRAVEL SCHEDULE ===================== -->
   <section id="schedule">
-    <div class="hero"><h1>✈️ China Tour 2027 🛂 📅</h1></div>
+    <div class="hero"><h1>✈️ China Tour 2027 🛂</h1></div>
     <div class="sub">Travel Schedule • Easy Overview</div>
 
     <div class="items">
@@ -100,7 +109,7 @@
         <div><h3>Passport Copies <span class="ok">- Received</span></h3></div></div>
 
       <div class="item"><div class="icon c-blue">💵</div>
-        <div><h3>Deposit</h3><p>- on or before Nov 30, 2026</p></div></div>
+        <div><h3>Deposit <span class="ok">(In Process)</span></h3><p>- on or before Nov 30, 2026</p></div></div>
 
       <div class="item"><div class="icon c-blue">💳</div>
         <div><h3>Final Payment</h3><p>- on or before Mar 1, 2027</p></div></div>
@@ -129,6 +138,11 @@
 
   <!-- ===================== WHAT IS REQUIRED ===================== -->
   <section id="required">
+    <nav class="nav">
+      <a href="#schedule">Travel Schedule</a>
+      <a href="#required">What is Required</a>
+    </nav>
+
     <div class="banner">What is Required - China Tour</div>
 
     <div class="panel">
@@ -194,6 +208,8 @@
 
     </div>
   </section>
+
+  <div class="home-row bottom"><a href="index.html" onclick="if (history.length > 1) { history.back(); return false; }">&larr; Home</a></div>
 
 </div>
 </body>
