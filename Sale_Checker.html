@@ -127,7 +127,7 @@ code { font-family: ui-monospace, Menlo, monospace; font-size: 0.85em; backgroun
 
 <div class="bar">
   <div class="bar-in">
-    <a class="btn primary" id="copy" role="button" target="_blank" rel="noopener noreferrer">Copy and open Claude</a>
+    <a class="btn primary" id="copy" role="button" target="_blank" rel="noopener noreferrer">Copy and search Google AI</a>
     <button class="btn" id="clear" type="button">Clear checks</button>
     <span class="status" id="status" role="status"></span>
   </div>
@@ -221,7 +221,7 @@ code { font-family: ui-monospace, Menlo, monospace; font-size: 0.85em; backgroun
       els.output.className = "output empty";
     }
     if (text) {
-      els.copy.href = "https://claude.ai/new?q=" + encodeURIComponent(text);
+      els.copy.href = "https://www.google.com/search?udm=50&q=" + encodeURIComponent(text);
       els.copy.removeAttribute("aria-disabled");
     } else {
       els.copy.removeAttribute("href");
