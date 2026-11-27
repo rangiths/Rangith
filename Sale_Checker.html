@@ -135,11 +135,11 @@ code { font-family: ui-monospace, Menlo, monospace; font-size: 0.85em; backgroun
 
 <script>
 (function () {
-  var KEY = "flyer-checker-v1";
+  var KEY = "flyer-checker-v2";
   var DEFAULT_TEMPLATE = "can you check {products} in the following flyers: {stores} and give me the product name, sale price and where it is and give me a short list of Where, Product, and cheapest price";
   var state = {
-    products: ["Milk", "Eggs", "Bread", "Butter", "Bananas"].map(function (n) { return { name: n, checked: false }; }),
-    stores: ["Walmart", "Fresco", "Food Basics", "No Frills"].map(function (n) { return { name: n, checked: false }; }),
+    products: ["Avocados", "Blackberry", "Blueberry", "Broccoli", "Cauliflower", "Dates", "Eggs", "Five Roses Flour", "Garlic", "Gay Lea Butter", "Ginger", "Ground Chicken", "Onion", "Pineapple", "Pomegranate", "Raspberry", "Strawberry"].map(function (n) { return { name: n, checked: false }; }),
+    stores: ["Canadian Tire", "Costco", "Food Basics", "Fresco", "Loblaws", "Metro", "No Frills", "Sobeys", "Walmart", "Wholesale Club"].map(function (n) { return { name: n, checked: false }; }),
     template: DEFAULT_TEMPLATE
   };
 
